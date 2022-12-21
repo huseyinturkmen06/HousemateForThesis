@@ -26,7 +26,7 @@ public class ModelAttributesOfCustomer extends ModelAttributes{
 
 
     //1 tane model attribue nesnesi,1 tane customer a ait olabilir
-
+    
 
 
     //belki videodaki gibi bu tarafı yok edip sadece customerda bir ilişki kurabiliriz
@@ -35,7 +35,11 @@ public class ModelAttributesOfCustomer extends ModelAttributes{
     @OneToOne
     private Customer customer;
 
+//    @Column(name="deneme")
+//    private String deneme;
 
-    @Column(name="deneme")
-    private String deneme;
+    @Column(name="class_of_customer")
+    private String classOfCustomer;
+
+
 }

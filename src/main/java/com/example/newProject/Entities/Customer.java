@@ -51,6 +51,9 @@ public class Customer {
     @Column(name="customer_department")
     private String customerDepartment;
 
+    @Column(name="customer_password")
+    private String customerPassword;
+
     @Column(name="customer_grade")
     private Integer customerGrade;
 
