@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface HavingRelationRepository extends JpaRepository<HouseCustomer,Integer> {
+public interface HavingRelationRepository extends JpaRepository<HouseCustomer,Long> {
 
     List<HouseCustomer> findHavingRelationsByCustomer(Customer customer);
     List<HouseCustomer> findHavingRelationsByHouse(House house);

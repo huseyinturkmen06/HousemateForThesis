@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface HouseRepository extends JpaRepository<House,Integer> {
+public interface HouseRepository extends JpaRepository<House,Long> {
 
 
 

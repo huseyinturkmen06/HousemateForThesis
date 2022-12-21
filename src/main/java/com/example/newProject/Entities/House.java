@@ -15,14 +15,19 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 
-//new comment
+//kullanıcılar luxury attibutelerinı  kendileri girecekler
+// (belirli bir text açıklaması ile kendilerine ne tercih etmeleri gerektiği de söylenecek)
+//generated value olayı biraz sıkıntılı, onun çeşitlerini inceleyip postman ile de girilenlerin
+//çakışmayacağı bir yol bulmak gerekir
 
 
 public class House {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //burayı şimdilik auto aptım ama 4 çeşidi var
+
     @Column(name="house_id")
-    private int houseId;
+    private Long houseId;
 
     @Column(name="house_address")
     private String houseAddress;
@@ -54,14 +59,26 @@ public class House {
     @Column(name="rent")
     private int rent;
 
+    @Column(name="class_of_house")
+    private String classOfHouse;
+
+
+
+
+    //****************************************************
+
     @JsonIgnore
     @OneToMany(mappedBy = "house")
     private List<HouseOwner> owners;
 
-
     @JsonIgnore
     @OneToMany(mappedBy = "house")
     List<HouseCustomer> houseCustomers;
+
+//    @JsonIgnore
+//    @JoinColumn(name="house_model_attr")
+//    @OneToOne
+//    ModelAttributesOfHouse houseModelAttribute;
 
 
 

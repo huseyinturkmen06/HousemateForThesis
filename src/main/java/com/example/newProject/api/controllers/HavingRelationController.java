@@ -22,7 +22,7 @@ public class HavingRelationController {
     }
 
     @GetMapping("/getRalationsOfOneCustomer/{id}")
-    public List<HouseCustomer> getRalationsOfOneCustomer(@PathVariable int id){
+    public List<HouseCustomer> getRalationsOfOneCustomer(@PathVariable Long id){
         return houseService.getRalationsOfOneCustomer(id);
     }
 }

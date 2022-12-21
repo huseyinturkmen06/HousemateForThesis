@@ -18,7 +18,7 @@ public class HouseCustomer {
     @Id
     @GeneratedValue
     @Column(name="relation_id")
-    private int relation_id;
+    private Long relation_id;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
