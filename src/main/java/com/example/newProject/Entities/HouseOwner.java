@@ -30,6 +30,9 @@ public class HouseOwner {
     @Column(name="owner_age")
     private int ownerAge;
 
+    @Column(name="owner_password")
+    private String ownerPassword;
+
     @Column(name="owner_hometown")
     private String ownerHometown;
 

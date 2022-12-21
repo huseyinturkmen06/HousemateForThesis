@@ -4,10 +4,7 @@ package com.example.newProject.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="model_of_house_owner")
@@ -29,5 +26,8 @@ public class ModelAttributesOfHouseOwner extends ModelAttributes {
             //üstteki satırı yazarsak bu tabloda houseowner id görünmüyor
     HouseOwner houseOwner;
 
+
+    @Column(name="class_of_houseOwner")
+    private String classOfHouseOwner;
 
 }
