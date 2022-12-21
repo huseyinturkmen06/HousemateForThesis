@@ -26,13 +26,15 @@ public class HouseService {
         this.customerRepository = customerRepository;
     }
 
-    public List<HouseCustomer> getRalationsOfOneCustomer(int id){
+    public List<HouseCustomer> getRalationsOfOneCustomer(Long id){
         Customer customer = customerRepository.findById(id).orElse(null);
         return havingRelationRepository.findHavingRelationsByCustomer(customer);
     }
 
 
-    public List<House> getAllHousesOfOneCustomer(int id){
+
+    //Get all houses of one customer
+    public List<House> getAllHousesOfOneCustomer(Long id){
         Customer customer = customerRepository.findById(id).orElse(null);
         List<HouseCustomer> relaions=havingRelationRepository.findHavingRelationsByCustomer(customer);
         //fe found all relations of one customer
@@ -44,6 +46,19 @@ public class HouseService {
 
         return allHousesOfOneUser;
     }
+
+
+    //Get all houses
+    public List<House> getAllHouses(){
+        return houseRepository.findAll();
+    }
+
+
+    //house id yi şimdilik path variable ilealıyoruz ama ilerde sto ile alıncak
+    public House getOneHouseById(Long houseId){
+        return houseRepository.findById(houseId).orElse(null);
+    }
+
 
 
 

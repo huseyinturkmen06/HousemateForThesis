@@ -19,7 +19,7 @@ public class HouseOwner {
     @Id
     @GeneratedValue
     @Column(name="owner_id")
-    private int ownerId;
+    private Long ownerId;
 
     @Column(name="owner_name")
     private String ownerName;
@@ -48,9 +48,23 @@ public class HouseOwner {
     @Column(name="owner_gender")
     private String ownerGender;
 
+    @Column(name="class_of_houseOwner")
+    private String classOfHouseOwner;
+
+
+
+    //***************************************************
+
     @ManyToOne
     @JoinColumn(name="house_id")
     @JsonIgnore
     private House house;
+
+
+
+//    @JsonIgnore
+//    @JoinColumn(name="house_owner_model_attr")
+//    @OneToOne
+//    ModelAttributesOfHouse houseOwnerModelAttribute;
 
 }

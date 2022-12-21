@@ -25,9 +25,11 @@ public class HouseController {
     }
 
     @GetMapping("/getAllHousesOfOneCustomer/{customerId}")
-    public List<House> getAllHousesOfOneCustomer(@PathVariable int customerId){
+    public List<House> getAllHousesOfOneCustomer(@PathVariable Long customerId){
         return houseService.getAllHousesOfOneCustomer(customerId);
     }
+
+
 
 
 
