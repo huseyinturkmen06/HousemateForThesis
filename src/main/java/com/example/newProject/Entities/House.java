@@ -59,8 +59,8 @@ public class House {
     @Column(name="rent")
     private int rent;
 
-    @Column(name="class_of_house")
-    private String classOfHouse;
+//    @Column(name="class_of_house")
+//    private String classOfHouse;
 
 
 

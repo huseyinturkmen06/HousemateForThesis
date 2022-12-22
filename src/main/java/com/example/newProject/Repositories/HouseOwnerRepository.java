@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HouseOwnerRepository extends JpaRepository<HouseOwner,Long> {
 
-
+    HouseOwner findHouseOwnerByOwnerUsername(String username);
 
 }

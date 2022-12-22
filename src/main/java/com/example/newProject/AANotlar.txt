@@ -1,0 +1,14 @@
+-bir customer 1 evi beğenmeye tıklayınca o evin id si ile customerin id si alınarak houseCustomer tablosuna yazılmalı
+-customerlar ile houseownerlar birbirlerine direkt olarak değil,
+aradaki evler ile ulaşmalılar
+-zaten evlerin customerlarını ve customerların evlerini bulabiliyoruz (db de var)
+-parola güncelleme işlemi için yeni sayfa açılmalı ve yeni end poinler, dto lar hazırlanmalı
+-ev ekleme sayfası farklı olmalı ve yalnızca kullanıcımız houseowner ise (houseowner tablosunda var ise )
+bu sayfa görünmeli--- saveOneHouse end pointine json ile post yapmalı
+-evlere girildiğinde ev sahipleri de görünmeli***********
+(getOwnersOfOneHouse)  --ownerda zaten houseId var
+
+owner - house ilişkisi var  (many to one )
+house - customer ilişkimiz var ( many to many )  // ara tablo kullanılarak oluşturuldu
+yani --->>>  owner - customer ilişkisi dolaylı olarak var  ownerdan---houseOwner a ----ordan da customer a
+

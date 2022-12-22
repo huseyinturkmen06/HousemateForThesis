@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+//aslında buraya pek ihtiyaç kalmayabilir
+//çünkü bu entity nin metodları (service kısmındaki) diğer classlar içine dağılabilir
+
 @RestController
 @RequestMapping("/relations")
 public class HavingRelationController {

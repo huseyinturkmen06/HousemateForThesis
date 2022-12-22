@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+//burassının metotlarını da tamamla
+
+
 @RestController
 @RequestMapping("/houses")
 public class HouseController {
@@ -28,6 +31,22 @@ public class HouseController {
     public List<House> getAllHousesOfOneCustomer(@PathVariable Long customerId){
         return houseService.getAllHousesOfOneCustomer(customerId);
     }
+
+    //getAllHouses
+
+    //getOneHouseById
+
+    //getHousesByAdress ----->House lara adreslerini belli eden attribuler ler eklenmeli
+
+    //saveOneHouse
+
+    //updateOneHouse
+
+
+
+
+
+
 
 
 
