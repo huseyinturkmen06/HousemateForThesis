@@ -1,8 +1,8 @@
 package com.example.newProject.Repositories;
 
-import com.example.newProject.Entities.Customer;
-import com.example.newProject.Entities.House;
-import com.example.newProject.Entities.HouseCustomer;
+import com.example.newProject.Entities.BasicEntities.Customer;
+import com.example.newProject.Entities.BasicEntities.House;
+import com.example.newProject.Entities.BasicEntities.HouseCustomer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

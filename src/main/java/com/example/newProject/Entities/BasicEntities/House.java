@@ -1,4 +1,4 @@
-package com.example.newProject.Entities;
+package com.example.newProject.Entities.BasicEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="houses")
@@ -32,17 +31,14 @@ public class House {
     @Column(name="house_address")
     private String houseAddress;
 
-    @Column(name="count_of_bathroom")
-    private int countOfBathroom;
+    @Column(name="house_type")
+    private String houseType;
 
-    @Column(name="count_of_bedroom")
-    private int countOfBedroom;
 
-    @Column(name="count_of_salon")
-    private int countOfSalon;
-
-    @Column(name="count_of_owner")
-    private int countOfOwner;
+//******************************************************************
+    //bu aradaki attributeler ayrıca Luxury tablosunda da olacak ancak buraya da koyduk
+    //çünkü bu attributeler kullanıcılara giderken aynı zamanda
+    //evin luxury puanını da belirlemeli
 
     @Column(name="heat_resource")
     private String heatResource;
@@ -58,6 +54,8 @@ public class House {
 
     @Column(name="rent")
     private int rent;
+
+//******************************************************************
 
 //    @Column(name="class_of_house")
 //    private String classOfHouse;
@@ -79,6 +77,8 @@ public class House {
 //    @JoinColumn(name="house_model_attr")
 //    @OneToOne
 //    ModelAttributesOfHouse houseModelAttribute;
+
+
 
 
 

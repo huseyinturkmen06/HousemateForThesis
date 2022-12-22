@@ -1,7 +1,7 @@
 package com.example.newProject.api.controllers;
 
 
-import com.example.newProject.Entities.HouseCustomer;
+import com.example.newProject.Entities.BasicEntities.HouseCustomer;
 import com.example.newProject.Services.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
