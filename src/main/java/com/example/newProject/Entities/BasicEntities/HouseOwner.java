@@ -1,4 +1,4 @@
-package com.example.newProject.Entities;
+package com.example.newProject.Entities.BasicEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

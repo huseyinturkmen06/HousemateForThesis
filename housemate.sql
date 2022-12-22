@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 21 Ara 2022, 19:51:58
+-- Üretim Zamanı: 22 Ara 2022, 15:32:38
 -- Sunucu sürümü: 10.4.27-MariaDB
 -- PHP Sürümü: 8.1.12
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customers` (
   `customer_id` bigint(20) NOT NULL,
-  `class_of_customer` varchar(255) DEFAULT NULL,
   `customer_age` int(11) DEFAULT NULL,
   `customer_department` varchar(255) DEFAULT NULL,
   `customer_email` varchar(255) DEFAULT NULL,
@@ -39,15 +38,18 @@ CREATE TABLE `customers` (
   `customer_name` varchar(255) DEFAULT NULL,
   `customer_phone` varchar(255) DEFAULT NULL,
   `customer_surname` varchar(255) DEFAULT NULL,
-  `customer_password` varchar(255) DEFAULT NULL
+  `customer_password` varchar(255) DEFAULT NULL,
+  `customer_username` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
 -- Tablo döküm verisi `customers`
 --
 
-INSERT INTO `customers` (`customer_id`, `class_of_customer`, `customer_age`, `customer_department`, `customer_email`, `customer_gender`, `customer_grade`, `customer_hometown`, `customer_name`, `customer_phone`, `customer_surname`, `customer_password`) VALUES
-(1, 'sadas', 1, 'asddas', 'sad', 'asd', 1, 'sad', 'asd', 'asd', 'asd', NULL);
+INSERT INTO `customers` (`customer_id`, `customer_age`, `customer_department`, `customer_email`, `customer_gender`, `customer_grade`, `customer_hometown`, `customer_name`, `customer_phone`, `customer_surname`, `customer_password`, `customer_username`) VALUES
+(1, 1, 'asddas', 'sad', 'asd', 1, 'sad', 'asd', 'asd', 'asd', NULL, NULL),
+(2, 0, '', 'deneme2@gmail.com', '', 0, '', 'hüseyin', '', 'türkmen', '1234', 'hsmann'),
+(3, 0, '', 'bulentgmail.com', '', 0, '', 'Canan', '', 'molla', '1234', 'bul61');
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(1);
+(4);
 
 -- --------------------------------------------------------
 
@@ -74,17 +76,13 @@ INSERT INTO `hibernate_sequence` (`next_val`) VALUES
 
 CREATE TABLE `houses` (
   `house_id` bigint(20) NOT NULL,
-  `class_of_house` varchar(255) DEFAULT NULL,
-  `count_of_bathroom` int(11) DEFAULT NULL,
-  `count_of_bedroom` int(11) DEFAULT NULL,
-  `count_of_owner` int(11) DEFAULT NULL,
-  `count_of_salon` int(11) DEFAULT NULL,
   `floor` int(11) DEFAULT NULL,
   `furnished` varchar(255) DEFAULT NULL,
   `heat_resource` varchar(255) DEFAULT NULL,
   `house_address` varchar(255) DEFAULT NULL,
   `internet_paved` varchar(255) DEFAULT NULL,
-  `rent` int(11) DEFAULT NULL
+  `rent` int(11) DEFAULT NULL,
+  `house_type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
@@ -107,7 +105,6 @@ CREATE TABLE `house_customer` (
 
 CREATE TABLE `house_owners` (
   `owner_id` bigint(20) NOT NULL,
-  `class_of_house_owner` varchar(255) DEFAULT NULL,
   `owner_age` int(11) DEFAULT NULL,
   `owner_department` varchar(255) DEFAULT NULL,
   `owner_gender` varchar(255) DEFAULT NULL,
@@ -118,7 +115,27 @@ CREATE TABLE `house_owners` (
   `owner_phone` varchar(255) DEFAULT NULL,
   `owner_surname` varchar(255) DEFAULT NULL,
   `house_id` bigint(20) DEFAULT NULL,
-  `owner_password` varchar(255) DEFAULT NULL
+  `owner_password` varchar(255) DEFAULT NULL,
+  `owner_username` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `luxury_attr_of_house`
+--
+
+CREATE TABLE `luxury_attr_of_house` (
+  `id` bigint(20) NOT NULL,
+  `count_of_bathroom` int(11) DEFAULT NULL,
+  `count_of_bedroom` int(11) DEFAULT NULL,
+  `count_of_owner` int(11) DEFAULT NULL,
+  `count_of_salon` int(11) DEFAULT NULL,
+  `floor` int(11) DEFAULT NULL,
+  `furnished` varchar(255) DEFAULT NULL,
+  `heat_resource` varchar(255) DEFAULT NULL,
+  `internet_paved` varchar(255) DEFAULT NULL,
+  `house_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
@@ -234,6 +251,13 @@ ALTER TABLE `house_owners`
   ADD KEY `FK5pjmjms9a6jvi6a1iag3xckjg` (`house_id`);
 
 --
+-- Tablo için indeksler `luxury_attr_of_house`
+--
+ALTER TABLE `luxury_attr_of_house`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKf2i088jp7o7wl722xen75qjkd` (`house_id`);
+
+--
 -- Tablo için indeksler `model_attributes`
 --
 ALTER TABLE `model_attributes`
@@ -276,6 +300,12 @@ ALTER TABLE `house_customer`
 --
 ALTER TABLE `house_owners`
   ADD CONSTRAINT `FK5pjmjms9a6jvi6a1iag3xckjg` FOREIGN KEY (`house_id`) REFERENCES `houses` (`house_id`);
+
+--
+-- Tablo kısıtlamaları `luxury_attr_of_house`
+--
+ALTER TABLE `luxury_attr_of_house`
+  ADD CONSTRAINT `FKf2i088jp7o7wl722xen75qjkd` FOREIGN KEY (`house_id`) REFERENCES `houses` (`house_id`);
 
 --
 -- Tablo kısıtlamaları `model_of_customer`

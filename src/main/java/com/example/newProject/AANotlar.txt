@@ -12,3 +12,44 @@ owner - house ilişkisi var  (many to one )
 house - customer ilişkimiz var ( many to many )  // ara tablo kullanılarak oluşturuldu
 yani --->>>  owner - customer ilişkisi dolaylı olarak var  ownerdan---houseOwner a ----ordan da customer a
 
+
+house ları adrese göre getirmek için değişiklikler yapılmalı
+
+generation value değeri her yerde sıkıntı
+bu işi bir fonksiyon ile bir şekilde yeni id atanırken
+db deki de dikkate alınarak olacak şekilde ayarlamamız gerek
+
+delete işlemleri de yapılmalı ve
+many to many içi ara tabloda nasıl bir customer bir evi ekleyince
+cusId ve houseId olan bir satır ekleniyorsa, favorilerden çıkarınca da silinmeli
+
+
+hiçbir şey null gelmemeli
+boş string gelmeli
+
+
+
+///
+owner ekleme ekranında
+önce ev eklet,
+(hoşgeldiniz owner, evinizi ekleyin gibi)
+owner kendisini girsin, ve girerken de
+//house owner tablosundaki houseId yerine
+//kişinin kendisini kaydetmeden önce girdiği ev gitsin
+//bu sayede houseowner eklerken houseId foreign key cant be null
+//hatası ile karşılaşmayız
+
+
+//customer eklerken ise bir şey eklemeye gerek yoktur
+//sadece customer ilişki kurarsa ara tabloya ekleme yapılcak
+
+//ev eklerken ise
+//house tablosundan ayrıyeten Luxury tablosuna da ekleme yapmak yeterli
+
+
+onura anlatılacak---
+saveOneHouseOwner da değişikli yapıld
+houseOwner tablosunda attributeler azaldı ve yeni tablo eklendi
+
+
+

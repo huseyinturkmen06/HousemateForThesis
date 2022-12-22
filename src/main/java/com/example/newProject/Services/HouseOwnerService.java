@@ -1,11 +1,8 @@
 package com.example.newProject.Services;
 
-import com.example.newProject.DTOs.CustomerRegisterDto;
-import com.example.newProject.DTOs.CustomerUpdateDto;
 import com.example.newProject.DTOs.HouseOwnerRegisterDto;
 import com.example.newProject.DTOs.HouseOwnerUpdateDto;
-import com.example.newProject.Entities.Customer;
-import com.example.newProject.Entities.HouseOwner;
+import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Repositories.HouseOwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +43,9 @@ public class HouseOwnerService {
 
     //saveOneOwner
     public HouseOwner saveOneHouseOwner(HouseOwnerRegisterDto houseOwnerRegisterDto){
+        //buraya bir de houseId gelmeli ve (path varieble)
+        //gelen houseId ile gerekli ev nesnesi bulunup houseOwner.setHouse(houseId) ile setleme yapılmalı
+
         HouseOwner houseOwnerToSave = new HouseOwner();
         houseOwnerToSave.setOwnerName(houseOwnerRegisterDto.getHouseOwnerName());
         houseOwnerToSave.setOwnerSurname(houseOwnerRegisterDto.getHouseOwnerSurname());

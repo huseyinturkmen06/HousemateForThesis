@@ -1,12 +1,11 @@
-package com.example.newProject.Entities;
+package com.example.newProject.Entities.ModelEntities;
 
 
+import com.example.newProject.Entities.BasicEntities.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.List;
 
 //one to one da karşılıklı olrak attributeler istendiği için sıkıntılar çıkıyor, düzelmesi gerek
 
@@ -19,7 +18,7 @@ public class ModelAttributesOfCustomer extends ModelAttributes{
     public ModelAttributesOfCustomer() {
     }
 
-    public ModelAttributesOfCustomer(Long id, String ownerName,Customer customer) {
+    public ModelAttributesOfCustomer(Long id, String ownerName, Customer customer) {
         super(id, ownerName);
         this.customer=customer;
     }

@@ -4,9 +4,9 @@ package com.example.newProject.Services;
 
 import com.example.newProject.DTOs.CustomerRegisterDto;
 import com.example.newProject.DTOs.CustomerUpdateDto;
-import com.example.newProject.Entities.Customer;
-import com.example.newProject.Entities.House;
-import com.example.newProject.Entities.HouseCustomer;
+import com.example.newProject.Entities.BasicEntities.Customer;
+import com.example.newProject.Entities.BasicEntities.House;
+import com.example.newProject.Entities.BasicEntities.HouseCustomer;
 import com.example.newProject.Repositories.CustomerRepository;
 import com.example.newProject.Repositories.HavingRelationRepository;
 import com.example.newProject.Repositories.HouseRepository;

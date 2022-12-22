@@ -1,6 +1,7 @@
-package com.example.newProject.Entities;
+package com.example.newProject.Entities.ModelEntities;
 
 
+import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -14,7 +15,7 @@ public class ModelAttributesOfHouseOwner extends ModelAttributes {
     public ModelAttributesOfHouseOwner() {
     }
 
-    public ModelAttributesOfHouseOwner(Long id, String ownerName,HouseOwner houseOwner) {
+    public ModelAttributesOfHouseOwner(Long id, String ownerName, HouseOwner houseOwner) {
         super(id, ownerName);
         this.houseOwner=houseOwner;
     }

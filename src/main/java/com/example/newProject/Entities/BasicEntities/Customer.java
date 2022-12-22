@@ -1,4 +1,4 @@
-package com.example.newProject.Entities;
+package com.example.newProject.Entities.BasicEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 //problemi çözmek için şu uygulanabilir
 //customer tablosunda customer_attribute_id olmayacak
 //sadece customer_attribute tablosuna customer_id foreign key olarak gidecek

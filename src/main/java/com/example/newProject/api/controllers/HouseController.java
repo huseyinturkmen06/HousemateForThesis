@@ -1,6 +1,6 @@
 package com.example.newProject.api.controllers;
 
-import com.example.newProject.Entities.House;
+import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Services.CustomerService;
 import com.example.newProject.Services.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
