@@ -30,6 +30,9 @@ public class HouseOwner {
     @Column(name="owner_age")
     private int ownerAge;
 
+    @Column(name="owner_username")
+    private String ownerUsername;
+
     @Column(name="owner_password")
     private String ownerPassword;
 
@@ -37,7 +40,7 @@ public class HouseOwner {
     private String ownerHometown;
 
     @Column(name="owner_grade")
-    private String ownerGrade;
+    private int ownerGrade;
 
     @Column(name="owner_department")
     private String ownerDepartment;
@@ -51,8 +54,8 @@ public class HouseOwner {
     @Column(name="owner_gender")
     private String ownerGender;
 
-    @Column(name="class_of_houseOwner")
-    private String classOfHouseOwner;
+//    @Column(name="class_of_houseOwner")
+//    private String classOfHouseOwner;
 
 
 

@@ -32,16 +32,20 @@ import java.util.Set;
 public class Customer {
 
     @Id
-//    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="customer_id")
     private Long customerId;
 
     @Column(name="customer_name")
     private String customerName;
 
+    @Column(name="customer_username")
+    private String customerUsername;
+
     @Column(name="customer_surname")
     private String customerSurname;
 
+    //bu kısım fronta göre ayarlanacak
     @Column(name="customer_age")
     private Integer customerAge;
 
@@ -66,8 +70,8 @@ public class Customer {
     @Column(name="customer_gender")
     private String customerGender;
 
-    @Column(name="class_of_customer")
-    private String classOfCustomer;
+//    @Column(name="class_of_customer")
+//    private String classOfCustomer;
 
 
     @JsonIgnore

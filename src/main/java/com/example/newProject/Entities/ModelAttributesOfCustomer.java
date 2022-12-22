@@ -26,7 +26,7 @@ public class ModelAttributesOfCustomer extends ModelAttributes{
 
 
     //1 tane model attribue nesnesi,1 tane customer a ait olabilir
-    
+
 
 
     //belki videodaki gibi bu tarafı yok edip sadece customerda bir ilişki kurabiliriz
