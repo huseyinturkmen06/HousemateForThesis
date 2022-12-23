@@ -1,4 +1,4 @@
-package com.example.newProject.DTOs;
+package com.example.newProject.DTOs.BasicDtos;
 
 import lombok.Data;
 

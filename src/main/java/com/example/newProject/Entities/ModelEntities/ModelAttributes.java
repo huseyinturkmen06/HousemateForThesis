@@ -26,38 +26,48 @@ public class ModelAttributes {
 
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="main_atttribute")
-    private String ownerName;
+//    @Column(name="main_atttribute")
+//    private String ownerName;
 
-    public ModelAttributes(Long id, String ownerName) {
+    public ModelAttributes(Long id) {
         this.id = id;
-        this.ownerName = ownerName;
+
     }
 
     @Column(name="sleep_time")
     private String sleepTime;
+    //--------------------------------------      string
+
 
     //eğer evde 1 kişi bile sigara içerse sigara içilen ev olur (şimdilik)
     @Column(name="smoking")
     private Boolean smooking;
+    //--------------------------------------      true or false
 
     //ev sahiplerinden 1 tanesinin bile evcil hayvanı varsa evin de having a pet i true olur
     @Column(name="having_pet")
     private Boolean havingPet;
+    //--------------------------------------      true or false
+
 
     //bu luxury nin ev dışındaki entitylerde adının luxury care olması gerekir
     @Column(name="luxury")
     private int luxury;
+    //--------------------------------------      1-10
 
     //evin gpa i içinde oturan kişilerin gpa i ortalaması olacak
     @Column(name="gpa")
     private Double gpa;
+    //--------------------------------------      0-4.0
 
     //renting duration ev için, içinde oturan kişilerden renting durationu en yüksek olan, olacak
     @Column(name="renting_duration")
-    private String rentingDuration;
+    private int rentingDuration;
+    //--------------------------------------      6-96   example
+
 
     //+++++++++++++++++++++++++++
     //house, customer ve houseOwner için class bulma işlemi hep aynı olacak çünkü

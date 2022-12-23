@@ -1,9 +1,11 @@
-package com.example.newProject.Services;
+package com.example.newProject.Services.BasicServices;
 
-import com.example.newProject.DTOs.HouseOwnerRegisterDto;
-import com.example.newProject.DTOs.HouseOwnerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.HouseOwnerRegisterDto;
+import com.example.newProject.DTOs.BasicDtos.HouseOwnerUpdateDto;
+import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
-import com.example.newProject.Repositories.HouseOwnerRepository;
+import com.example.newProject.Repositories.BasicRepos.HouseOwnerRepository;
+import com.example.newProject.Repositories.BasicRepos.HouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,12 @@ import java.util.List;
 public class HouseOwnerService {
 
     HouseOwnerRepository houseOwnerRepository;
+    HouseRepository houseRepository;
     @Autowired
-    public HouseOwnerService(HouseOwnerRepository houseOwnerRepository) {
+    public HouseOwnerService(HouseOwnerRepository houseOwnerRepository,
+                             HouseRepository houseRepository) {
         this.houseOwnerRepository = houseOwnerRepository;
+        this.houseRepository=houseRepository;
     }
 
     //house owner ın evi var, evin de customer ları var
@@ -59,6 +64,12 @@ public class HouseOwnerService {
         houseOwnerToSave.setOwnerPhone("");
         houseOwnerToSave.setOwnerGender("");
         //list of housecustomer henüz olmadı
+
+        House houseForForeignKey = houseRepository.findById(houseOwnerRegisterDto.getHouseId()).orElse(null);
+        houseOwnerToSave.setHouse(houseForForeignKey);
+        //null kontolü vs yapılacak her yere
+
+
         return houseOwnerRepository.save(houseOwnerToSave);
 
     }
@@ -79,6 +90,11 @@ public class HouseOwnerService {
             houseOwnerToUpdate.setOwnerPhone(houseOwnerUpdateDto.getHouseOwnerPhone());
             houseOwnerToUpdate.setOwnerMail(houseOwnerUpdateDto.getHouseOwnerEmail());
             houseOwnerToUpdate.setOwnerGender(houseOwnerUpdateDto.getHouseOwnerGender());
+
+            //-----------
+            House houseForForeignKey = houseRepository.findById(houseOwnerUpdateDto.getHouseId()).orElse(null);
+            houseOwnerToUpdate.setHouse(houseForForeignKey);
+
             return houseOwnerRepository.save(houseOwnerToUpdate);
 
         }

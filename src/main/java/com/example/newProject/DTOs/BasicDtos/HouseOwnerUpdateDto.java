@@ -1,4 +1,4 @@
-package com.example.newProject.DTOs;
+package com.example.newProject.DTOs.BasicDtos;
 
 import lombok.Data;
 
@@ -17,6 +17,9 @@ public class HouseOwnerUpdateDto {
     private String houseOwnerPhone;
     private String houseOwnerEmail;
     private String houseOwnerGender;
+
+    //-----------------------
+    private Long houseId;
 
     //password farklı bir alanda update edileceğinden
     //bu dto da almadık

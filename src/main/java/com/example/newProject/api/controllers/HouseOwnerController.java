@@ -1,10 +1,11 @@
 package com.example.newProject.api.controllers;
 
 
-import com.example.newProject.DTOs.HouseOwnerRegisterDto;
-import com.example.newProject.DTOs.HouseOwnerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.HouseOwnerRegisterDto;
+import com.example.newProject.DTOs.BasicDtos.HouseOwnerUpdateDto;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
-import com.example.newProject.Services.HouseOwnerService;
+import com.example.newProject.Services.BasicServices.HouseOwnerService;
+import com.example.newProject.Services.ModelServices.ModelAttrOfHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,12 @@ import java.util.List;
 public class HouseOwnerController {
 
     private HouseOwnerService houseOwnerService;
+    private ModelAttrOfHouseService modelAttrOfHouseService;
     @Autowired
-    public HouseOwnerController(HouseOwnerService houseOwnerService) {
+    public HouseOwnerController(HouseOwnerService houseOwnerService
+    ,ModelAttrOfHouseService modelAttrOfHouseService) {
         this.houseOwnerService = houseOwnerService;
+        this.modelAttrOfHouseService=modelAttrOfHouseService;
     }
 
 
@@ -45,7 +49,13 @@ public class HouseOwnerController {
     //saveOneOwner
     @PostMapping("/saveOneHouseOwner")
     public HouseOwner saveOneHouseOwner(@RequestBody HouseOwnerRegisterDto houseOwnerRegisterDto){
-        return houseOwnerService.saveOneHouseOwner(houseOwnerRegisterDto);
+        houseOwnerService.saveOneHouseOwner(houseOwnerRegisterDto);
+        //önce kullanıcıyı kaydet
+        modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseOwnerRegisterDto.getHouseId());
+        //sonra o kullanıcının özelliklerini de göz önüne alarak house özelliğini kaydet
+        return null;
+        //üstteki sıra değimesin diye burada bi şey döndürmedim.
+        //burasının sonuçlarını db den bakabiliriz
     }
 
     //updateOneOwner

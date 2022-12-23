@@ -1,4 +1,4 @@
-package com.example.newProject.DTOs;
+package com.example.newProject.DTOs.BasicDtos;
 
 import lombok.Data;
 
@@ -10,5 +10,7 @@ public class HouseOwnerRegisterDto {
     private String houseOwnerEmail;
     private String houseOwnerPassword;
     private String houseOwnerUsername;
+    //-----------------------
+    private Long houseId;
 
 }

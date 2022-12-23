@@ -1,13 +1,13 @@
-package com.example.newProject.Services;
+package com.example.newProject.Services.BasicServices;
 
 
-import com.example.newProject.DTOs.HouseSaveDto;
+import com.example.newProject.DTOs.BasicDtos.HouseSaveDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
-import com.example.newProject.Repositories.CustomerRepository;
-import com.example.newProject.Repositories.HavingRelationRepository;
-import com.example.newProject.Repositories.HouseRepository;
+import com.example.newProject.Repositories.BasicRepos.CustomerRepository;
+import com.example.newProject.Repositories.BasicRepos.HavingRelationRepository;
+import com.example.newProject.Repositories.BasicRepos.HouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

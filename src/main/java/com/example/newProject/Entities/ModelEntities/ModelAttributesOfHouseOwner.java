@@ -15,8 +15,8 @@ public class ModelAttributesOfHouseOwner extends ModelAttributes {
     public ModelAttributesOfHouseOwner() {
     }
 
-    public ModelAttributesOfHouseOwner(Long id, String ownerName, HouseOwner houseOwner) {
-        super(id, ownerName);
+    public ModelAttributesOfHouseOwner(Long id, HouseOwner houseOwner) {
+        super(id);
         this.houseOwner=houseOwner;
     }
 
@@ -25,7 +25,7 @@ public class ModelAttributesOfHouseOwner extends ModelAttributes {
     @OneToOne
 //            (mappedBy = "houseOwnerModelAttribute")
             //üstteki satırı yazarsak bu tabloda houseowner id görünmüyor
-    HouseOwner houseOwner;
+    private HouseOwner houseOwner;
 
 
     @Column(name="class_of_houseOwner")

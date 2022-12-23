@@ -52,4 +52,13 @@ saveOneHouseOwner da değişikli yapıld
 houseOwner tablosunda attributeler azaldı ve yeni tablo eklendi
 
 
+house un model Dto su olmayacak çünkü içinde oturan customerların model dto ortalaması ile oluşacak
+
+basic entity lere class id si vermedik, onların class laraın eereişmek için alt altt tablolarına id leri ile erişiyoruz
+
+şimdilik evin luxury değerini içine kayıtlı kullanıcıların luxury_care ortalaması ile buluyoruz ama sonrada bir ağa girecek (tablosu oluşturuldu)
+
+
+tüm find by id lere null kontolü yap
+
 

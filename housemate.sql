@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Ara 2022, 15:32:38
+-- Üretim Zamanı: 23 Ara 2022, 04:32:47
 -- Sunucu sürümü: 10.4.27-MariaDB
 -- PHP Sürümü: 8.1.12
 
@@ -149,10 +149,9 @@ CREATE TABLE `model_attributes` (
   `gpa` double DEFAULT NULL,
   `having_pet` bit(1) DEFAULT NULL,
   `luxury` int(11) DEFAULT NULL,
-  `main_atttribute` varchar(255) DEFAULT NULL,
-  `renting_duration` varchar(255) DEFAULT NULL,
   `sleep_time` varchar(255) DEFAULT NULL,
-  `smoking` bit(1) DEFAULT NULL
+  `smoking` bit(1) DEFAULT NULL,
+  `renting_duration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
@@ -166,20 +165,19 @@ CREATE TABLE `model_of_customer` (
   `gpa` double DEFAULT NULL,
   `having_pet` bit(1) DEFAULT NULL,
   `luxury` int(11) DEFAULT NULL,
-  `main_atttribute` varchar(255) DEFAULT NULL,
-  `renting_duration` varchar(255) DEFAULT NULL,
   `sleep_time` varchar(255) DEFAULT NULL,
   `smoking` bit(1) DEFAULT NULL,
   `customer_id` bigint(20) DEFAULT NULL,
-  `class_of_customer` varchar(255) DEFAULT NULL
+  `class_of_customer` varchar(255) DEFAULT NULL,
+  `renting_duration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
 -- Tablo döküm verisi `model_of_customer`
 --
 
-INSERT INTO `model_of_customer` (`id`, `gpa`, `having_pet`, `luxury`, `main_atttribute`, `renting_duration`, `sleep_time`, `smoking`, `customer_id`, `class_of_customer`) VALUES
-(1, 213, b'1', 1, 'sad', 'sad', 'asd', b'1', 1, NULL);
+INSERT INTO `model_of_customer` (`id`, `gpa`, `having_pet`, `luxury`, `sleep_time`, `smoking`, `customer_id`, `class_of_customer`, `renting_duration`) VALUES
+(1, 213, b'1', 1, 'asd', b'1', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -192,12 +190,11 @@ CREATE TABLE `model_of_house` (
   `gpa` double DEFAULT NULL,
   `having_pet` bit(1) DEFAULT NULL,
   `luxury` int(11) DEFAULT NULL,
-  `main_atttribute` varchar(255) DEFAULT NULL,
-  `renting_duration` varchar(255) DEFAULT NULL,
   `sleep_time` varchar(255) DEFAULT NULL,
   `smoking` bit(1) DEFAULT NULL,
   `house_id` bigint(20) DEFAULT NULL,
-  `class_of_house` varchar(255) DEFAULT NULL
+  `class_of_house` varchar(255) DEFAULT NULL,
+  `renting_duration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
@@ -211,12 +208,11 @@ CREATE TABLE `model_of_house_owner` (
   `gpa` double DEFAULT NULL,
   `having_pet` bit(1) DEFAULT NULL,
   `luxury` int(11) DEFAULT NULL,
-  `main_atttribute` varchar(255) DEFAULT NULL,
-  `renting_duration` varchar(255) DEFAULT NULL,
   `sleep_time` varchar(255) DEFAULT NULL,
   `smoking` bit(1) DEFAULT NULL,
   `house_owner_id` bigint(20) DEFAULT NULL,
-  `class_of_house_owner` varchar(255) DEFAULT NULL
+  `class_of_house_owner` varchar(255) DEFAULT NULL,
+  `renting_duration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --

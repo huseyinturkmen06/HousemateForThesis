@@ -1,10 +1,10 @@
 package com.example.newProject.api.controllers;
 
-import com.example.newProject.DTOs.CustomerRegisterDto;
-import com.example.newProject.DTOs.CustomerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.CustomerRegisterDto;
+import com.example.newProject.DTOs.BasicDtos.CustomerUpdateDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
-import com.example.newProject.Services.CustomerService;
-import com.example.newProject.Services.HouseService;
+import com.example.newProject.Services.BasicServices.CustomerService;
+import com.example.newProject.Services.BasicServices.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,15 +1,15 @@
-package com.example.newProject.Services;
+package com.example.newProject.Services.BasicServices;
 
 //generation type ın db ye göre artması gerekiyo, gerekirse bi metod yazılsın
 
-import com.example.newProject.DTOs.CustomerRegisterDto;
-import com.example.newProject.DTOs.CustomerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.CustomerRegisterDto;
+import com.example.newProject.DTOs.BasicDtos.CustomerUpdateDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
-import com.example.newProject.Repositories.CustomerRepository;
-import com.example.newProject.Repositories.HavingRelationRepository;
-import com.example.newProject.Repositories.HouseRepository;
+import com.example.newProject.Repositories.BasicRepos.CustomerRepository;
+import com.example.newProject.Repositories.BasicRepos.HavingRelationRepository;
+import com.example.newProject.Repositories.BasicRepos.HouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
