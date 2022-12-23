@@ -1,4 +1,4 @@
-package com.example.newProject.Repositories;
+package com.example.newProject.Repositories.BasicRepos;
 
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;

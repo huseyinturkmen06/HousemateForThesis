@@ -2,7 +2,7 @@ package com.example.newProject.api.controllers;
 
 
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
-import com.example.newProject.Services.HouseService;
+import com.example.newProject.Services.BasicServices.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

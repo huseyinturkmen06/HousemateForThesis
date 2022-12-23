@@ -18,8 +18,8 @@ public class ModelAttributesOfCustomer extends ModelAttributes{
     public ModelAttributesOfCustomer() {
     }
 
-    public ModelAttributesOfCustomer(Long id, String ownerName, Customer customer) {
-        super(id, ownerName);
+    public ModelAttributesOfCustomer(Long id, Customer customer) {
+        super(id);
         this.customer=customer;
     }
 

@@ -15,8 +15,8 @@ public class ModelAttributesOfHouse extends ModelAttributes{
     public ModelAttributesOfHouse() {
     }
 
-    public ModelAttributesOfHouse(Long id, String ownerName, House house) {
-        super(id, ownerName);
+    public ModelAttributesOfHouse(Long id, House house) {
+        super(id);
         this.house=house;
     }
 
