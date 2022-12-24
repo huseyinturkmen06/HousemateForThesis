@@ -5,6 +5,7 @@ import com.example.newProject.DTOs.ModelDtos.ModelAttrOfHouseOwnerDto;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfCustomer;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfHouse;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfHouseOwner;
+import com.example.newProject.Services.BasicServices.HouseOwnerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfCustomerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseOwnerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseService;
@@ -21,22 +22,31 @@ public class ModelAttributesController {
     private ModelAttrOfCustomerService modelAttrOfCustomerService;
     private ModelAttrOfHouseService modelAttrOfHouseService;
     private ModelAttrOfHouseOwnerService modelAttrOfHouseOwnerService;
+    private HouseOwnerService houseOwnerService;
 
     @Autowired
     public ModelAttributesController(ModelAttrOfCustomerService modelAttrOfCustomerService,
                                      ModelAttrOfHouseService modelAttrOfHouseService,
-                                     ModelAttrOfHouseOwnerService modelAttrOfHouseOwnerService) {
+                                     ModelAttrOfHouseOwnerService modelAttrOfHouseOwnerService,
+                                     HouseOwnerService houseOwnerService) {
         this.modelAttrOfCustomerService = modelAttrOfCustomerService;
         this.modelAttrOfHouseService = modelAttrOfHouseService;
         this.modelAttrOfHouseOwnerService = modelAttrOfHouseOwnerService;
+        this.houseOwnerService=houseOwnerService;
     }
 
 
-    //saveOneHouseOwnerAttribute
-    @PostMapping("/saveOneHouseOwnerAttribute")
+    //saveOrUpdateOneHouseOwnerAttribute
+    @PostMapping("/saveOrUpdateOneHouseOwnerAttribute")
     public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(
             @RequestBody ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto){
-        return modelAttrOfHouseOwnerService.saveOneHouseOwnerAttribute(modelAttrOfHouseOwnerDto);
+        modelAttrOfHouseOwnerService.saveOneHouseOwnerAttribute(modelAttrOfHouseOwnerDto);
+        //yalnızca houseOwner ekleyince değil, houseOwner attribute güncelleyince de evin attribute leri güncellenmeli
+        //buarada houseOwner ın house id sini bulmalıyız
+        Long houseId=houseOwnerService.
+                getOneOwnerByOwnerId(modelAttrOfHouseOwnerDto.getHouseOwnerId()).getHouse().getHouseId();
+        modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseId);
+        return null;
     }
 
 

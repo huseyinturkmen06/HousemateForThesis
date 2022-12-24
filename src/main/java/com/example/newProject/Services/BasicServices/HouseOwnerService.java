@@ -46,6 +46,9 @@ public class HouseOwnerService {
         return houseOwner;
     }
 
+
+
+
     //saveOneOwner
     public HouseOwner saveOneHouseOwner(HouseOwnerRegisterDto houseOwnerRegisterDto){
         //buraya bir de houseId gelmeli ve (path varieble)
@@ -65,9 +68,28 @@ public class HouseOwnerService {
         houseOwnerToSave.setOwnerGender("");
         //list of housecustomer henüz olmadı
 
-        House houseForForeignKey = houseRepository.findById(houseOwnerRegisterDto.getHouseId()).orElse(null);
+        //----------- eski kod-------
+//            House houseForForeignKey = houseRepository.findById(houseOwnerUpdateDto.getHouseId()).orElse(null);
+//            houseOwnerToUpdate.setHouse(houseForForeignKey);
+
+        //----------- yeni kod-------
+        House houseForForeignKey = houseRepository.findById(1L).orElse(null);
         houseOwnerToSave.setHouse(houseForForeignKey);
-        //null kontolü vs yapılacak her yere
+        //foreign key her zaman 1 id li house oldu
+        //şimdi houseOwner eklerken houseId almamıza gerek yok artık
+
+
+
+        //şimdilik yeni kaydolan her houseOwner 1 numaralı house'a kaydoluyor
+        //zaten bir houseOwner ın 1 tane house bilgisi olabilir
+        //kullanıcı gerçekten ev girmek istediğinde ise yeni bir ev oluşturulur ve
+        //kullanıcının yalnızca house nesnesi (foreign key) değişmiş olur
+
+
+
+
+
+
 
 
         return houseOwnerRepository.save(houseOwnerToSave);
@@ -91,9 +113,15 @@ public class HouseOwnerService {
             houseOwnerToUpdate.setOwnerMail(houseOwnerUpdateDto.getHouseOwnerEmail());
             houseOwnerToUpdate.setOwnerGender(houseOwnerUpdateDto.getHouseOwnerGender());
 
-            //-----------
+            //buraya geldiğimizde
+            //controllerdan update i çağırdığımızda , house un db de olması bekleniyor
+
+
             House houseForForeignKey = houseRepository.findById(houseOwnerUpdateDto.getHouseId()).orElse(null);
             houseOwnerToUpdate.setHouse(houseForForeignKey);
+            //null kontolü vs yapılacak her yere
+
+
 
             return houseOwnerRepository.save(houseOwnerToUpdate);
 

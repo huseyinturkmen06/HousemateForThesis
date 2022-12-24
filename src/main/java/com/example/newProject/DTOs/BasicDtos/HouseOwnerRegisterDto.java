@@ -11,6 +11,6 @@ public class HouseOwnerRegisterDto {
     private String houseOwnerPassword;
     private String houseOwnerUsername;
     //-----------------------
-    private Long houseId;
+//    private Long houseId;
 
 }

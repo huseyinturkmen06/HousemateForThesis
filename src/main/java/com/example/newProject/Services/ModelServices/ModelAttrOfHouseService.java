@@ -26,10 +26,12 @@ public class ModelAttrOfHouseService {
     @Autowired
     public ModelAttrOfHouseService(ModelAttrOfHouseOwnerRepo modelAttrOfHouseOwnerRepo,
                                    HouseOwnerRepository houseOwnerRepository,
-                                   HouseRepository houseRepository) {
+                                   HouseRepository houseRepository,
+                                   ModelAttrOfHouseRepo modelAttrOfHouseRepo) {
         this.modelAttrOfHouseOwnerRepo = modelAttrOfHouseOwnerRepo;
         this.houseOwnerRepository=houseOwnerRepository;
         this.houseRepository=houseRepository;
+        this.modelAttrOfHouseRepo=modelAttrOfHouseRepo;
     }
 
     public ModelAttributesOfHouse setAttributesOfOneHouseByOwners(Long houseId){
@@ -49,6 +51,9 @@ public class ModelAttrOfHouseService {
         //burada bir evin kaç customer ı olduğunu görüyoruz ki bölme işlemini ona göre yapalım
 
         for(HouseOwner houseOwner:allOwnersOfHouse){
+            //buraya geldiğimizde houseOwnerların attributeleri setlenmemiş oluyor
+            //ama buraya gelmeden anket de doldurulmuş olunacağı için bu sefer nul gelmez
+
             ModelAttributesOfHouseOwner attribue=modelAttrOfHouseOwnerRepo.findByHouseOwner(houseOwner);
             //üstteki satır bize 1 kayıt döner ama içinde attributeleri var tabi
             //her bir owner ın model attributelerine erişiyoruz
@@ -111,8 +116,16 @@ public class ModelAttrOfHouseService {
 //***********************************
         //evin tüm attributeleri hazırlandı, şimdi setleme zamanı
         //model attrıbutes of house ekleyeceiğimiz zaman zaten eklenecek houseId hazır olmalı
+        //eğer model attributes of house tablosunda gereken house nesnesi ile bir kayıt varsa onu güncelle
+        //yoksa yeni modelAttributesOfHouse nesnesi oluştur ve onun kayıtlarını gir
 
-        ModelAttributesOfHouse modelAttributesOfHouse = new ModelAttributesOfHouse();
+
+        ModelAttributesOfHouse modelAttributesOfHouse =  modelAttrOfHouseRepo.findByHouse(houseTemp);
+        if(modelAttributesOfHouse==null){
+            modelAttributesOfHouse=new ModelAttributesOfHouse();
+        }
+        //null gelmişse tabloda yok demektir ve yeni kayıt oluşur
+
         modelAttributesOfHouse.setSleepTime(ModelSleepTimeAttrOfHouse);
         //şimdlik böyle yaptık ama daha sonra mutlaka yukarıdakii fonksyionun içindeki değeri başta olmak üzere değişecektir
         modelAttributesOfHouse.setSmooking(ModelSmokingAttrOfHouse);

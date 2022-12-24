@@ -62,3 +62,7 @@ basic entity lere class id si vermedik, onların class laraın eereişmek için 
 tüm find by id lere null kontolü yap
 
 
+having a pet tam uymuyor..
+ve aynı evin model_house tablosunda yeniden kaydı oluşuyor
+
+

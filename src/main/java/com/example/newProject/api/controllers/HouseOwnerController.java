@@ -51,7 +51,7 @@ public class HouseOwnerController {
     public HouseOwner saveOneHouseOwner(@RequestBody HouseOwnerRegisterDto houseOwnerRegisterDto){
         houseOwnerService.saveOneHouseOwner(houseOwnerRegisterDto);
         //önce kullanıcıyı kaydet
-        modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseOwnerRegisterDto.getHouseId());
+//        modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseOwnerRegisterDto.getHouseId());
         //sonra o kullanıcının özelliklerini de göz önüne alarak house özelliğini kaydet
         return null;
         //üstteki sıra değimesin diye burada bi şey döndürmedim.
@@ -61,7 +61,15 @@ public class HouseOwnerController {
     //updateOneOwner
     @PutMapping("/updateOneHouseOwner")
     public HouseOwner updateOneCustomer(@RequestBody HouseOwnerUpdateDto houseOwnerUpdateDto){
-        return houseOwnerService.updateOneHouseOwner(houseOwnerUpdateDto);
+        houseOwnerService.updateOneHouseOwner(houseOwnerUpdateDto);
+        //kullanıya burada house da eklemiş oluruz
+        //houseId verince bir house a bir houseOwner eklendiği için
+        //önce güncelleme ile house houseOwner arasında yeni bir ilişki yaratıyoruz
+        modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseOwnerUpdateDto.getHouseId());
+        //sonra houseOwner a yeni verdiğimiz houseId ile setAttributesOfOneHouseByOwners
+        //ile güncelleme ile yeni bağlantı yaptığımız house un tüm houseOwnerslarının attributeleri ile
+        //gereken evin model attribute lerini belirliyoruz
+        return null;
     }
 
 
