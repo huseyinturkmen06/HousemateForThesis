@@ -27,7 +27,14 @@ public class ModelAttrOfCustomerService {
 
     ////save one ModelAttribute of customer  (poll)
     public ModelAttributesOfCustomer saveOneCustomerAttribute(ModelAttrOfCustomerDto modelAttrOfCustomerDto){
-        ModelAttributesOfCustomer attrOfCustomerToSave= new ModelAttributesOfCustomer();
+        ModelAttributesOfCustomer attrOfCustomerToSave=
+                modelAttrOfCustomerRepo.
+                        findByCustomer(customerRepository.
+                                findById(modelAttrOfCustomerDto.getCustomerId()).orElse(null));
+        if(attrOfCustomerToSave==null){
+            attrOfCustomerToSave=new ModelAttributesOfCustomer();
+        }
+
         attrOfCustomerToSave.setSleepTime(modelAttrOfCustomerDto.getSleepTime());
         attrOfCustomerToSave.setSmooking(modelAttrOfCustomerDto.getSmooking());
         attrOfCustomerToSave.setHavingPet(modelAttrOfCustomerDto.getHavingPet());

@@ -7,5 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ModelAttrOfCustomerRepo extends JpaRepository<ModelAttributesOfCustomer,Long> {
     //bunların id değerlerinde bir sıkıntı çıkabilir ama bakarız
 
+    ModelAttributesOfCustomer findByCustomer(Customer customer);
+
 
 }

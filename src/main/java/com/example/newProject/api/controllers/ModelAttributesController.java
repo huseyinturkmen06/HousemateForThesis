@@ -51,7 +51,7 @@ public class ModelAttributesController {
 
 
     //saveOneModelAttrOfCustomer
-    @PostMapping("/saveOneModelAttrOfCustomer")
+    @PostMapping("/saveOrUpdateOneModelAttrOfCustomer")
     public ModelAttributesOfCustomer saveOneCustomerAttribute(
             @RequestBody ModelAttrOfCustomerDto modelAttrOfCustomerDto){
         return modelAttrOfCustomerService.saveOneCustomerAttribute(modelAttrOfCustomerDto);
