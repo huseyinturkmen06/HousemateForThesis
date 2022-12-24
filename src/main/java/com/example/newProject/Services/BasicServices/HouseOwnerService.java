@@ -74,6 +74,7 @@ public class HouseOwnerService {
 
         //----------- yeni kod-------
         House houseForForeignKey = houseRepository.findById(1L).orElse(null);
+        //save ederken 1 id li house u aldık (ik kayıtta)
         houseOwnerToSave.setHouse(houseForForeignKey);
         //foreign key her zaman 1 id li house oldu
         //şimdi houseOwner eklerken houseId almamıza gerek yok artık

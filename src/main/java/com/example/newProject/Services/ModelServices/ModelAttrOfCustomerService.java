@@ -48,6 +48,8 @@ public class ModelAttrOfCustomerService {
             System.out.println("Service: Modele eklenecek customer bulundu");
             attrOfCustomerToSave.setCustomer(customerForForeignKey);
             //customer nesnesi de setlendi
+            //burasında sade Long dönmek için bi değiştirdik
+
             return modelAttrOfCustomerRepo.save(attrOfCustomerToSave);
         }
         else{

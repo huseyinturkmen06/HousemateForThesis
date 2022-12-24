@@ -29,7 +29,10 @@ public class ModelAttributesOfCustomer extends ModelAttributes{
 
 
     //belki videodaki gibi bu tarafı yok edip sadece customerda bir ilişki kurabiliriz
-    @JsonIgnore
+//    @JsonIgnore
+    //burası tekrar json nesnesi dönüyor ama front da onur düzeltti
+
+
     @JoinColumn(name="customer_id")
     @OneToOne
     private Customer customer;

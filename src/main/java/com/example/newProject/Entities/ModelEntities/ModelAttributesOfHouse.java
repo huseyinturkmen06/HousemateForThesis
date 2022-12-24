@@ -20,7 +20,7 @@ public class ModelAttributesOfHouse extends ModelAttributes{
         this.house=house;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     @JoinColumn(name="house_id")
     @OneToOne
     House house;

@@ -36,6 +36,11 @@ public class ModelAttributesController {
     }
 
 
+
+//bunlar birden çok kayıt girmiş olursa post ların yanında putları da girr
+
+
+
     //saveOrUpdateOneHouseOwnerAttribute
     @PostMapping("/saveOrUpdateOneHouseOwnerAttribute")
     public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(
@@ -55,6 +60,7 @@ public class ModelAttributesController {
     public ModelAttributesOfCustomer saveOneCustomerAttribute(
             @RequestBody ModelAttrOfCustomerDto modelAttrOfCustomerDto){
         return modelAttrOfCustomerService.saveOneCustomerAttribute(modelAttrOfCustomerDto);
+
     }
 
     //saveOneHouseAttribute

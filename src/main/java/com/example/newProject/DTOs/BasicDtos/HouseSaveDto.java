@@ -28,6 +28,8 @@ public class HouseSaveDto {
 
     private int countOfOwner;
 
+    //ancak bunlarla henüz bir setleme yapmadık
+
     //******************************************
 
     private String houseType;
