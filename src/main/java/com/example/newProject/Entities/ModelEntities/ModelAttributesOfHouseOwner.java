@@ -20,7 +20,7 @@ public class ModelAttributesOfHouseOwner extends ModelAttributes {
         this.houseOwner=houseOwner;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     @JoinColumn(name="house_owner_id")
     @OneToOne
 //            (mappedBy = "houseOwnerModelAttribute")

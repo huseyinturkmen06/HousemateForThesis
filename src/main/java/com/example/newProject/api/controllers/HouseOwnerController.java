@@ -49,19 +49,19 @@ public class HouseOwnerController {
     //saveOneOwner
     @PostMapping("/saveOneHouseOwner")
     public HouseOwner saveOneHouseOwner(@RequestBody HouseOwnerRegisterDto houseOwnerRegisterDto){
-        houseOwnerService.saveOneHouseOwner(houseOwnerRegisterDto);
+        return houseOwnerService.saveOneHouseOwner(houseOwnerRegisterDto);
         //önce kullanıcıyı kaydet
 //        modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseOwnerRegisterDto.getHouseId());
         //sonra o kullanıcının özelliklerini de göz önüne alarak house özelliğini kaydet
-        return null;
+//        return null;
         //üstteki sıra değimesin diye burada bi şey döndürmedim.
         //burasının sonuçlarını db den bakabiliriz
     }
 
     //updateOneOwner
     @PutMapping("/updateOneHouseOwner")
-    public HouseOwner updateOneCustomer(@RequestBody HouseOwnerUpdateDto houseOwnerUpdateDto){
-        houseOwnerService.updateOneHouseOwner(houseOwnerUpdateDto);
+    public HouseOwner updateOneHouseOwner(@RequestBody HouseOwnerUpdateDto houseOwnerUpdateDto){
+        HouseOwner updatedHouseOwner=houseOwnerService.updateOneHouseOwner(houseOwnerUpdateDto);
         //kullanıya burada house da eklemiş oluruz
         //houseId verince bir house a bir houseOwner eklendiği için
         //önce güncelleme ile house houseOwner arasında yeni bir ilişki yaratıyoruz
@@ -69,8 +69,16 @@ public class HouseOwnerController {
         //sonra houseOwner a yeni verdiğimiz houseId ile setAttributesOfOneHouseByOwners
         //ile güncelleme ile yeni bağlantı yaptığımız house un tüm houseOwnerslarının attributeleri ile
         //gereken evin model attribute lerini belirliyoruz
-        return null;
+        return updatedHouseOwner;
     }
+
+
+    //houseOwner önce ev kayıt olsun
+    //sonra ev girsin ve o evin id si dönsün
+    // (yani houseOwner ev kaydettiktan hemen sonra updateOneHouseOwner'a bir istek daha atılsın
+    //ve houseOwner ın HouseId si de yeni kaydolan evin id değeri olsun
+
+
 
 
 

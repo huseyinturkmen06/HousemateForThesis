@@ -82,6 +82,7 @@ public class HouseService {
 
         houseToSave.setHeatResource(houseSaveDto.getHeatResource());
         houseToSave.setFurnished(houseSaveDto.getFurnished());
+
         houseToSave.setInternetPaved(houseSaveDto.getInternetPaved());
         houseToSave.setFloor(houseSaveDto.getFloor());
         houseToSave.setRent(houseSaveDto.getRent());
