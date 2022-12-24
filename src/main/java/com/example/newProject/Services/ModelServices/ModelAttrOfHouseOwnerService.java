@@ -22,7 +22,16 @@ public class ModelAttrOfHouseOwnerService {
 
     //save one ModelAttribute of houseOwner   (poll)
     public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto){
-        ModelAttributesOfHouseOwner attrOfHouseOwnerToSave= new ModelAttributesOfHouseOwner();
+        ModelAttributesOfHouseOwner attrOfHouseOwnerToSave=
+                modelAttrOfHouseOwnerRepo.
+                        findByHouseOwner(houseOwnerRepository.findById(modelAttrOfHouseOwnerDto.getHouseOwnerId()).
+                                orElse(null));
+        //önce houseOwner a göre attribute ü çek,
+        //eğer tabloda o house owner a ait attribute yoksa yeni attribute kaydı oluştur.
+        if(attrOfHouseOwnerToSave==null){
+            attrOfHouseOwnerToSave=new ModelAttributesOfHouseOwner();
+        }
+
         attrOfHouseOwnerToSave.setSleepTime(modelAttrOfHouseOwnerDto.getSleepTime());
         attrOfHouseOwnerToSave.setSmooking(modelAttrOfHouseOwnerDto.getSmooking());
         attrOfHouseOwnerToSave.setHavingPet(modelAttrOfHouseOwnerDto.getHavingPet());

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 23 Ara 2022, 04:32:47
+-- Üretim Zamanı: 24 Ara 2022, 01:17:46
 -- Sunucu sürümü: 10.4.27-MariaDB
 -- PHP Sürümü: 8.1.12
 
@@ -49,7 +49,8 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`customer_id`, `customer_age`, `customer_department`, `customer_email`, `customer_gender`, `customer_grade`, `customer_hometown`, `customer_name`, `customer_phone`, `customer_surname`, `customer_password`, `customer_username`) VALUES
 (1, 1, 'asddas', 'sad', 'asd', 1, 'sad', 'asd', 'asd', 'asd', NULL, NULL),
 (2, 0, '', 'deneme2@gmail.com', '', 0, '', 'hüseyin', '', 'türkmen', '1234', 'hsmann'),
-(3, 0, '', 'bulentgmail.com', '', 0, '', 'Canan', '', 'molla', '1234', 'bul61');
+(3, 0, '', 'bulentgmail.com', '', 0, '', 'Canan', '', 'molla', '1234', 'bul61'),
+(11, 0, '', 'bul@deneme', '', 0, '', 'Bülent2', '', 'MMO', '7777', 'bulll');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(4);
+(12);
 
 -- --------------------------------------------------------
 
@@ -84,6 +85,16 @@ CREATE TABLE `houses` (
   `rent` int(11) DEFAULT NULL,
   `house_type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `houses`
+--
+
+INSERT INTO `houses` (`house_id`, `floor`, `furnished`, `heat_resource`, `house_address`, `internet_paved`, `rent`, `house_type`) VALUES
+(1, 2, 'yes', 'yes', 'kalkınma', 'yes', 3000, '2+1'),
+(2, 2, 'yes', 'yes', 'kayadibi', 'yes', 2000, '2+1'),
+(3, 2, 'yes', 'yes', 'nilüfer', 'yes', 5000, '3+1'),
+(4, 2, 'yes', 'yes', 'deniz mah', 'yes', 3000, '1+1');
 
 -- --------------------------------------------------------
 
@@ -118,6 +129,15 @@ CREATE TABLE `house_owners` (
   `owner_password` varchar(255) DEFAULT NULL,
   `owner_username` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `house_owners`
+--
+
+INSERT INTO `house_owners` (`owner_id`, `owner_age`, `owner_department`, `owner_gender`, `owner_grade`, `owner_hometown`, `owner_mail`, `owner_name`, `owner_phone`, `owner_surname`, `house_id`, `owner_password`, `owner_username`) VALUES
+(1, 20, 'changed dep', 'Male', '4', 'izmir', 'changed@email', 'Changed2 Name', '0534', 'Changed Surname', 2, '1234', 'changed username'),
+(2, 20, 'changed dep', 'Male', '4', 'izmir', 'changed@email', 'Hasannn', '0534', 'Changed Surname', 2, '1234', 'changed username'),
+(4, 0, '', '', '0', '', 'me@gmail.com', 'Mesut', '', 'Türkmen', 1, '1234', 'metu');
 
 -- --------------------------------------------------------
 
@@ -172,13 +192,6 @@ CREATE TABLE `model_of_customer` (
   `renting_duration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
---
--- Tablo döküm verisi `model_of_customer`
---
-
-INSERT INTO `model_of_customer` (`id`, `gpa`, `having_pet`, `luxury`, `sleep_time`, `smoking`, `customer_id`, `class_of_customer`, `renting_duration`) VALUES
-(1, 213, b'1', 1, 'asd', b'1', 1, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -197,6 +210,13 @@ CREATE TABLE `model_of_house` (
   `renting_duration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
+--
+-- Tablo döküm verisi `model_of_house`
+--
+
+INSERT INTO `model_of_house` (`id`, `gpa`, `having_pet`, `luxury`, `sleep_time`, `smoking`, `house_id`, `class_of_house`, `renting_duration`) VALUES
+(8, 2.9, b'1', 4, '', b'1', 2, NULL, 35);
+
 -- --------------------------------------------------------
 
 --
@@ -214,6 +234,14 @@ CREATE TABLE `model_of_house_owner` (
   `class_of_house_owner` varchar(255) DEFAULT NULL,
   `renting_duration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `model_of_house_owner`
+--
+
+INSERT INTO `model_of_house_owner` (`id`, `gpa`, `having_pet`, `luxury`, `sleep_time`, `smoking`, `house_owner_id`, `class_of_house_owner`, `renting_duration`) VALUES
+(5, 3.4, b'0', 7, '22.30', b'1', 1, NULL, 20),
+(7, 2.4, b'0', 2, '23.30', b'0', 2, NULL, 50);
 
 --
 -- Dökümü yapılmış tablolar için indeksler
