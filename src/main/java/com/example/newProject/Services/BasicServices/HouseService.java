@@ -8,6 +8,7 @@ import com.example.newProject.Entities.BasicEntities.HouseCustomer;
 import com.example.newProject.Repositories.BasicRepos.CustomerRepository;
 import com.example.newProject.Repositories.BasicRepos.HavingRelationRepository;
 import com.example.newProject.Repositories.BasicRepos.HouseRepository;
+import com.example.newProject.Services.ModelServices.LuxuryAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,17 @@ public class HouseService {
     HouseRepository houseRepository;
     HavingRelationRepository havingRelationRepository;
     CustomerRepository customerRepository;
+    LuxuryAttributeService luxuryAttributeService;
 
     @Autowired
-    public HouseService(HouseRepository houseRepository,HavingRelationRepository havingRelationRepository,CustomerRepository customerRepository) {
+    public HouseService(HouseRepository houseRepository,
+                        HavingRelationRepository havingRelationRepository,
+                        CustomerRepository customerRepository,
+                        LuxuryAttributeService luxuryAttributeService) {
         this.houseRepository = houseRepository;
         this.havingRelationRepository = havingRelationRepository;
         this.customerRepository = customerRepository;
+        this.luxuryAttributeService=luxuryAttributeService;
     }
 
     public List<HouseCustomer> getRalationsOfOneCustomer(Long id){
@@ -81,7 +87,12 @@ public class HouseService {
         houseToSave.setInternetPaved(houseSaveDto.getInternetPaved());
         houseToSave.setFloor(houseSaveDto.getFloor());
         houseToSave.setRent(houseSaveDto.getRent());
-        return houseRepository.save(houseToSave);
+        House houseToReturn = houseRepository.save(houseToSave);
+
+        //house kaydederken luxury attribute ünü de kaydet
+        luxuryAttributeService.saveOneLuxuryAttributeOfHouse(houseSaveDto,houseToReturn.getHouseId());
+
+        return houseToReturn;
     }
 
 
