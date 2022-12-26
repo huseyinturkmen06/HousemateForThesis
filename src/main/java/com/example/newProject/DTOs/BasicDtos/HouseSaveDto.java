@@ -23,6 +23,8 @@ public class HouseSaveDto {
     private int countOfBathroom;
 
     private int countOfBedroom;
+    //salon hariç tüm odalar bedroom olarak geçecek
+    //çünkü zaten öğrenci evi
 
     private int countOfSalon;
 
@@ -32,7 +34,8 @@ public class HouseSaveDto {
 
     //******************************************
 
-    private String houseType;
+//    private String houseType;
+    //houseType ı burdan almıyoruz çünkü girilen yatak odası ve oturma odasından çekilcek
 
     private String heatResource;
 

@@ -66,3 +66,7 @@ having a pet tam uymuyor..
 ve aynı evin model_house tablosunda yeniden kaydı oluşuyor
 
 
+
+houseLuxury puanı şimdilik içindekilerin ortalamasından geliyor ama
+daha sonra Luxury modelden gelecek
+

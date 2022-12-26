@@ -47,6 +47,8 @@ public class HouseOwnerController {
     }
 
     //saveOneOwner
+    //burası aşırı hata vermeye başladı
+
     @PostMapping("/saveOneHouseOwner")
     public HouseOwner saveOneHouseOwner(@RequestBody HouseOwnerRegisterDto houseOwnerRegisterDto){
         return houseOwnerService.saveOneHouseOwner(houseOwnerRegisterDto);
