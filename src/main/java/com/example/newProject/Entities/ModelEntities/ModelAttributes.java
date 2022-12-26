@@ -75,7 +75,8 @@ public class ModelAttributes {
     //onlar sadece ileride houseOwnerları da customer yaparız vs deiye kalabilir
     @Column(name="price")
     private int price;
-    //--------------------------------------      6-96   example
+    //burasın sonradan eklendi
+    //--------------------------------------      3500   example
 
 
     //+++++++++++++++++++++++++++

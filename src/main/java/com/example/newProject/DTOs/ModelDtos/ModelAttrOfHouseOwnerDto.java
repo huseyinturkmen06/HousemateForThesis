@@ -16,6 +16,7 @@ public class ModelAttrOfHouseOwnerDto {
 
     private int luxury;
 
+
     private Double gpa;
 
     private Integer rentingDuration;
