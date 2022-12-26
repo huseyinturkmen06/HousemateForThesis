@@ -47,7 +47,8 @@ public class ModelAttrOfHouseService {
 
         House houseTemp = houseRepository.findById(houseId).orElse(null);
         List<HouseOwner> allOwnersOfHouse = houseOwnerRepository.findAllByHouse(houseTemp);
-//        System.out.println(allOwnersOfHouse.get(1).getOwnerName());
+//        System.out.println(allOwnersOfHouse.get(0).getOwnerName());
+
         //örneğin 1 id li evin tüm owner larını almış olduk
 
         int countOfCustomerOfHouse=allOwnersOfHouse.size();

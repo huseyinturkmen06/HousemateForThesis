@@ -51,7 +51,7 @@ public class ModelAttributesController {
         //buarada houseOwner ın house id sini bulmalıyız
         Long houseId=houseOwnerService.
                 getOneOwnerByOwnerId(modelAttrOfHouseOwnerDto.getHouseOwnerId()).getHouse().getHouseId();
-        System.out.println(houseId);
+//        System.out.println(houseId);
         modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseId);
         return null;
     }
