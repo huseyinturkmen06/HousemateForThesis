@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 26 Ara 2022, 13:08:32
+-- Üretim Zamanı: 26 Ara 2022, 21:29:23
 -- Sunucu sürümü: 10.4.27-MariaDB
 -- PHP Sürümü: 8.1.12
 
@@ -42,6 +42,13 @@ CREATE TABLE `customers` (
   `customer_username` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
+--
+-- Tablo döküm verisi `customers`
+--
+
+INSERT INTO `customers` (`customer_id`, `customer_age`, `customer_department`, `customer_email`, `customer_gender`, `customer_grade`, `customer_hometown`, `customer_name`, `customer_password`, `customer_phone`, `customer_surname`, `customer_username`) VALUES
+(1, 22, 'ceng', 'deneme@gmail.com', 'male', 2, 'Bayburt', 'Onur', '1234', '0566', 'Keskin', 'hnor');
+
 -- --------------------------------------------------------
 
 --
@@ -57,7 +64,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(12);
+(18);
 
 -- --------------------------------------------------------
 
@@ -82,7 +89,9 @@ CREATE TABLE `houses` (
 
 INSERT INTO `houses` (`house_id`, `floor`, `furnished`, `heat_resource`, `house_address`, `house_type`, `internet_paved`, `rent`) VALUES
 (1, 2, 'yes', 'yes', 'yeni mahalle', '5+2', 'yes', 3000),
-(2, 2, 'yes', 'yes', 'ikinci mahalle', '5+2', 'yes', 4000);
+(2, 2, 'yes', 'yes', 'ikinci mahalle', '5+2', 'yes', 4000),
+(12, 2, 'yes', 'yes', 'yeşil mahalle', '5+2', 'yes', 3000),
+(13, 2, 'yes', 'yes', 'mavi mahalle', '5+2', 'yes', 3000);
 
 -- --------------------------------------------------------
 
@@ -123,7 +132,7 @@ CREATE TABLE `house_owners` (
 --
 
 INSERT INTO `house_owners` (`owner_id`, `owner_age`, `owner_department`, `owner_gender`, `owner_grade`, `owner_hometown`, `owner_mail`, `owner_name`, `owner_password`, `owner_phone`, `owner_surname`, `owner_username`, `house_id`) VALUES
-(1, 22, 'ceng', 'male', 4, 'giresun', 'denemeq@gmail.com', 'Evrim', '6666', '0532', 'Kar', 'evr_kars', 1),
+(1, 45, 'machine', 'female', 3, 'giresunn', 'mail', 'Arda', '6666', 'changed dep2', 'Changed Surname', 'Cemil', 1),
 (3, 0, '', '', 0, '', 'me@gmail.com', 'Mesut', '1234', '', 'Türkmen', 'metu', 1);
 
 -- --------------------------------------------------------
@@ -144,6 +153,13 @@ CREATE TABLE `luxury_attr_of_house` (
   `internet_paved` varchar(255) DEFAULT NULL,
   `house_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `luxury_attr_of_house`
+--
+
+INSERT INTO `luxury_attr_of_house` (`id`, `count_of_bathroom`, `count_of_bedroom`, `count_of_owner`, `count_of_salon`, `floor`, `furnished`, `heat_resource`, `internet_paved`, `house_id`) VALUES
+(14, 1, 5, 1, 2, 2, 'yes', 'yes', 'yes', 13);
 
 -- --------------------------------------------------------
 
@@ -181,6 +197,13 @@ CREATE TABLE `model_of_customer` (
   `customer_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
+--
+-- Tablo döküm verisi `model_of_customer`
+--
+
+INSERT INTO `model_of_customer` (`id`, `gpa`, `having_pet`, `luxury`, `price`, `renting_duration`, `sleep_time`, `smoking`, `class_of_customer`, `customer_id`) VALUES
+(16, 3.5, b'0', 7, 2850, 20, '22.30', b'1', NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -205,7 +228,7 @@ CREATE TABLE `model_of_house` (
 --
 
 INSERT INTO `model_of_house` (`id`, `gpa`, `having_pet`, `luxury`, `price`, `renting_duration`, `sleep_time`, `smoking`, `class_of_house`, `house_id`) VALUES
-(10, 3, b'1', 7, 3000, 20, '', b'1', NULL, 1);
+(10, 2.95, b'1', 7, 3000, 20, '', b'1', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -231,8 +254,8 @@ CREATE TABLE `model_of_house_owner` (
 --
 
 INSERT INTO `model_of_house_owner` (`id`, `gpa`, `having_pet`, `luxury`, `price`, `renting_duration`, `sleep_time`, `smoking`, `class_of_house_owner`, `house_owner_id`) VALUES
-(9, 4, b'0', 7, 3950, 20, '22.30', b'1', NULL, 3),
-(11, 2, b'0', 7, 3950, 20, '22.30', b'1', NULL, 1);
+(11, 2.5, b'0', 7, 3950, 20, '22.30', b'1', NULL, 1),
+(17, 3.4, b'0', 7, 1000, 20, '22.30', b'1', NULL, 3);
 
 --
 -- Dökümü yapılmış tablolar için indeksler

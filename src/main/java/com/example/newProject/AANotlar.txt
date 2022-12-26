@@ -70,3 +70,10 @@ ve aynı evin model_house tablosunda yeniden kaydı oluşuyor
 houseLuxury puanı şimdilik içindekilerin ortalamasından geliyor ama
 daha sonra Luxury modelden gelecek
 
+
+house kaydederken luxury attribute ünü de kaydetttik ama
+house güncellerken luxury attribute ünü de güncellememiz gerek ve henüz
+house güncelleme hazırlamamışız, onu da halletmemiz lazım
+
+
+
