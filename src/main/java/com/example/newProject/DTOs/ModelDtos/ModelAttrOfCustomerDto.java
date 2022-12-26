@@ -21,6 +21,8 @@ public class ModelAttrOfCustomerDto {
 
     private Integer rentingDuration;
 
+    private int price;
+
     //***************************
     private Long customerId;
     //burası foreign key customer nesnesini setlemede kullanılacak

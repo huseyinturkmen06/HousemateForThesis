@@ -69,6 +69,15 @@ public class ModelAttributes {
     //--------------------------------------      6-96   example
 
 
+    //bu sefer evin price ı yalnızca evin kendi fiyatından gelicek
+    //yani içinde oturanların fiyat tercihlerinden gelmeyecek
+    //burdan inherite ettikleri için houseOwnermodel ve customermodel larınd da price etiketleri olacak ama
+    //onlar sadece ileride houseOwnerları da customer yaparız vs deiye kalabilir
+    @Column(name="price")
+    private int price;
+    //--------------------------------------      6-96   example
+
+
     //+++++++++++++++++++++++++++
     //house, customer ve houseOwner için class bulma işlemi hep aynı olacak çünkü
     //hepsinin model attributeleri aynı ve aynı attributeler ile oluşturulmuş ağa girecekler

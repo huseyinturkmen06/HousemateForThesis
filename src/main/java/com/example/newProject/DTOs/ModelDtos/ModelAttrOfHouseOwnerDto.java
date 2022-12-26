@@ -20,6 +20,8 @@ public class ModelAttrOfHouseOwnerDto {
 
     private Integer rentingDuration;
 
+    private int price;
+
     //***************************
     private Long houseOwnerId;
 

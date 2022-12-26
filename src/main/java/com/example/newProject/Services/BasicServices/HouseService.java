@@ -69,25 +69,23 @@ public class HouseService {
         House houseToSave= new House();
         //id yi almadık çünkü otomatik gelecek
         houseToSave.setHouseAddress(houseSaveDto.getHouseAddress());
-//        houseToSave.setCountOfBathroom(houseSaveDto.getCountOfBathroom());
-//        houseToSave.setCountOfBedroom(houseSaveDto.getCountOfBedroom());
-//        houseToSave.setCountOfSalon(houseSaveDto.getCountOfSalon());
-//        houseToSave.setCountOfOwner(houseSaveDto.getCountOfOwner());
-        houseToSave.setHouseType("");
 
-        //şimdilik houseType ı boş geçiyoruz ama
-        //normalde housetype için house un Luxury attributes tablosundan verilerni çekip bir karara varıyoruz
-        //bunu sınvlar bittikten hemen sonra tamamlabiliriz
-        //ve şimdilik sadece
+        int roomCount= houseSaveDto.getCountOfBedroom();
+        int saloonCount= houseSaveDto.getCountOfSalon();
+        String typeAsString= Integer.toString(roomCount)+"+"+Integer.toString(saloonCount);
+
+        houseToSave.setHouseType(typeAsString);
 
         houseToSave.setHeatResource(houseSaveDto.getHeatResource());
         houseToSave.setFurnished(houseSaveDto.getFurnished());
-
         houseToSave.setInternetPaved(houseSaveDto.getInternetPaved());
         houseToSave.setFloor(houseSaveDto.getFloor());
         houseToSave.setRent(houseSaveDto.getRent());
         return houseRepository.save(houseToSave);
     }
+
+
+
 
     //updateOneHouse
     public House updateOneHouse(HouseSaveDto houseSaveDto){

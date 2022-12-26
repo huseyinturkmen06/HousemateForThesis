@@ -5,10 +5,7 @@ import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Services.BasicServices.CustomerService;
 import com.example.newProject.Services.BasicServices.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,9 +44,15 @@ public class HouseController {
     //getHousesByAdress ----->House lara adreslerini belli eden attribuler ler eklenmeli
 
     //saveOneHouse
-    public House saveOneHouse(HouseSaveDto houseSaveDto){
+    @PostMapping("/saveOneHouse")
+    public House saveOneHouse(@RequestBody HouseSaveDto houseSaveDto){
         return houseService.saveOneHouse(houseSaveDto);
     }
+    //bir ev kaydederken DTO dan Luxury Of HOuse içinde bilgi alıyoruz
+    //ve luxury of house tablosuna da ekleme yapıyoruz
+
+
+
 
     //updateOneHouse
     //bunu service içinde yazdım ama bazı kontroller yapıp buraya eklicem

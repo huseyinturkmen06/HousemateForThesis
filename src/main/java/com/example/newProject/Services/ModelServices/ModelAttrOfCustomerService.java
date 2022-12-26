@@ -36,6 +36,7 @@ public class ModelAttrOfCustomerService {
         }
 
         attrOfCustomerToSave.setSleepTime(modelAttrOfCustomerDto.getSleepTime());
+        attrOfCustomerToSave.setPrice(modelAttrOfCustomerDto.getPrice());
         attrOfCustomerToSave.setSmooking(modelAttrOfCustomerDto.getSmooking());
         attrOfCustomerToSave.setHavingPet(modelAttrOfCustomerDto.getHavingPet());
         attrOfCustomerToSave.setLuxury(modelAttrOfCustomerDto.getLuxury());

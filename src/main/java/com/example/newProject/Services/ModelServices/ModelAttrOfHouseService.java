@@ -35,6 +35,7 @@ public class ModelAttrOfHouseService {
     }
 
     public ModelAttributesOfHouse setAttributesOfOneHouseByOwners(Long houseId){
+        System.out.println(houseId);
 
         //find all houses of one house
         List<String> sleepTimes= new ArrayList<>();
@@ -46,6 +47,8 @@ public class ModelAttrOfHouseService {
 
         House houseTemp = houseRepository.findById(houseId).orElse(null);
         List<HouseOwner> allOwnersOfHouse = houseOwnerRepository.findAllByHouse(houseTemp);
+//        System.out.println(allOwnersOfHouse.get(1).getOwnerName());
+        //örneğin 1 id li evin tüm owner larını almış olduk
 
         int countOfCustomerOfHouse=allOwnersOfHouse.size();
         //burada bir evin kaç customer ı olduğunu görüyoruz ki bölme işlemini ona göre yapalım
@@ -54,15 +57,17 @@ public class ModelAttrOfHouseService {
             //buraya geldiğimizde houseOwnerların attributeleri setlenmemiş oluyor
             //ama buraya gelmeden anket de doldurulmuş olunacağı için bu sefer nul gelmez
 
-            ModelAttributesOfHouseOwner attribue=modelAttrOfHouseOwnerRepo.findByHouseOwner(houseOwner);
+            ModelAttributesOfHouseOwner attribute=modelAttrOfHouseOwnerRepo.findByHouseOwner(houseOwner);
+            System.out.println("--------------------");
+            System.out.println(attribute.getGpa());
             //üstteki satır bize 1 kayıt döner ama içinde attributeleri var tabi
             //her bir owner ın model attributelerine erişiyoruz
-            sleepTimes.add(attribue.getSleepTime());
-            smookings.add(attribue.getSmooking());
-            havingPets.add(attribue.getSmooking());
-            luxuries.add(attribue.getLuxury());
-            gpas.add(attribue.getGpa());
-            rentingDurations.add(attribue.getRentingDuration());
+            sleepTimes.add(attribute.getSleepTime());
+            smookings.add(attribute.getSmooking());
+            havingPets.add(attribute.getSmooking());
+            luxuries.add(attribute.getLuxury());
+            gpas.add(attribute.getGpa());
+            rentingDurations.add(attribute.getRentingDuration());
         }
 
 
@@ -133,6 +138,22 @@ public class ModelAttrOfHouseService {
         modelAttributesOfHouse.setLuxury(ModelLuxuryAttrOfHouse.intValue());
         modelAttributesOfHouse.setGpa(ModelGpaAttrOfHouse);
         modelAttributesOfHouse.setRentingDuration(ModelRentingDurationAttrOfHouse.intValue());
+
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        modelAttributesOfHouse.setPrice(3000);
+        //++++++++++++++++++++
+        //normalde bir houseEklendiğinde otomatikmen Luxury attibute of house tablosuna da
+        //house un model özellikleri eklenmeli ve sonra yeni kullanıcı eklenince burası güncellenmeli ama
+        // (Luxury house ) tablosunda houseId ye uygun price çekilmeli ve
+        //o price buraya verilmeli
+        //şuan orası olmadığı için her yeni kaydolan evin price değerini 3000 yapıyoruz
+        //yani buraso değişecek
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
         //---------------------------
         modelAttributesOfHouse.setHouse(houseTemp);
         //methodun en başında el de ettiğimiz evi de foreign key olarak ayarladık ve en sağa kaydetiik

@@ -45,11 +45,13 @@ public class ModelAttributesController {
     @PostMapping("/saveOrUpdateOneHouseOwnerAttribute")
     public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(
             @RequestBody ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto){
+
         modelAttrOfHouseOwnerService.saveOneHouseOwnerAttribute(modelAttrOfHouseOwnerDto);
         //yalnızca houseOwner ekleyince değil, houseOwner attribute güncelleyince de evin attribute leri güncellenmeli
         //buarada houseOwner ın house id sini bulmalıyız
         Long houseId=houseOwnerService.
                 getOneOwnerByOwnerId(modelAttrOfHouseOwnerDto.getHouseOwnerId()).getHouse().getHouseId();
+        System.out.println(houseId);
         modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseId);
         return null;
     }

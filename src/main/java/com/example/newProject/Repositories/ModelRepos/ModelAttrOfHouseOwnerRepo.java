@@ -9,4 +9,5 @@ import java.util.List;
 public interface ModelAttrOfHouseOwnerRepo extends JpaRepository<ModelAttributesOfHouseOwner,Long> {
 
     ModelAttributesOfHouseOwner findByHouseOwner(HouseOwner houseOwner);
+
 }

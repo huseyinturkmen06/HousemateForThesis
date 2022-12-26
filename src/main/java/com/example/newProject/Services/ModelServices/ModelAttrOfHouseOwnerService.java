@@ -22,6 +22,8 @@ public class ModelAttrOfHouseOwnerService {
 
     //save one ModelAttribute of houseOwner   (poll)
     public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto){
+        System.out.println(modelAttrOfHouseOwnerDto.getHouseOwnerId());
+        System.out.println("*************************");
         ModelAttributesOfHouseOwner attrOfHouseOwnerToSave=
                 modelAttrOfHouseOwnerRepo.
                         findByHouseOwner(houseOwnerRepository.findById(modelAttrOfHouseOwnerDto.getHouseOwnerId()).
@@ -32,6 +34,7 @@ public class ModelAttrOfHouseOwnerService {
             attrOfHouseOwnerToSave=new ModelAttributesOfHouseOwner();
         }
 
+        attrOfHouseOwnerToSave.setPrice(modelAttrOfHouseOwnerDto.getPrice());
         attrOfHouseOwnerToSave.setSleepTime(modelAttrOfHouseOwnerDto.getSleepTime());
         attrOfHouseOwnerToSave.setSmooking(modelAttrOfHouseOwnerDto.getSmooking());
         attrOfHouseOwnerToSave.setHavingPet(modelAttrOfHouseOwnerDto.getHavingPet());
