@@ -5,12 +5,16 @@ import com.example.newProject.DTOs.ModelDtos.ModelAttrOfHouseOwnerDto;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfHouseOwner;
+import com.example.newProject.Model_Integration.PredictionHandler;
 import com.example.newProject.Repositories.BasicRepos.HouseOwnerRepository;
 import com.example.newProject.Repositories.ModelRepos.ModelAttrOfHouseOwnerRepo;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.io.IOException;
 
 @Service
 public class ModelAttrOfHouseOwnerService {
@@ -38,8 +42,8 @@ public class ModelAttrOfHouseOwnerService {
 
 
 
-    //save one ModelAttribute of houseOwner   (poll)
-    public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto){
+    //save or update one ModelAttribute of houseOwner   (poll)
+    public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto) throws JSONException, IOException, InterruptedException {
         System.out.println(modelAttrOfHouseOwnerDto.getHouseOwnerId());
         System.out.println("*************************");
         ModelAttributesOfHouseOwner attrOfHouseOwnerToSave=
@@ -66,6 +70,42 @@ public class ModelAttrOfHouseOwnerService {
             System.out.println("Service: Modele eklenecek ev bulundu");
             attrOfHouseOwnerToSave.setHouseOwner(houseOwnerForForeignKey);
             //customer nesnesi de setlendi
+
+            //*********************************** model class ın ile haberleşme başlangıcı
+//*********************************************************
+
+            String sleepTime=modelAttrOfHouseOwnerDto.getSleepTime();
+
+            String smooking="";
+            if(modelAttrOfHouseOwnerDto.getSmooking()==true)  smooking="yes";
+            else smooking="no";
+
+            String havingAPet="";
+            if(modelAttrOfHouseOwnerDto.getHavingPet()==true) havingAPet="yes";
+            else havingAPet="no";
+
+            String luxuryCare=Integer.toString(modelAttrOfHouseOwnerDto.getLuxury());
+
+            String gpa=String. valueOf(modelAttrOfHouseOwnerDto.getGpa());
+
+            //age yerine şimdilik 0 veriyorum çünkü age bizim db de yok
+            String age="0";
+
+            String rentingDuration=Integer.toString(modelAttrOfHouseOwnerDto.getRentingDuration());
+
+            String price=Integer.toString(modelAttrOfHouseOwnerDto.getPrice());
+//*********************************************************************
+//*********************************************************************
+
+            //autowired hatasından dolayı methodu static yaptık ve öyle çağırdık
+            //function call
+            String classOfHouseOwner= PredictionHandler.ModelFunction(
+                    sleepTime,smooking,havingAPet,luxuryCare, gpa,age,rentingDuration,price);
+
+            //setting model class attribute to saving object
+            attrOfHouseOwnerToSave.setClassOfHouseOwner(classOfHouseOwner);
+
+
             return modelAttrOfHouseOwnerRepo.save(attrOfHouseOwnerToSave);
         }
         else{
