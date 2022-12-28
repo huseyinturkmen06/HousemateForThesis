@@ -10,4 +10,6 @@ public interface ModelAttrOfCustomerRepo extends JpaRepository<ModelAttributesOf
     ModelAttributesOfCustomer findByCustomer(Customer customer);
 
 
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.newProject.Services.ModelServices;
 
 
+import com.example.newProject.DTOs.BasicDtos.CustomerAttributeGetDto;
 import com.example.newProject.DTOs.ModelDtos.ModelAttrOfCustomerDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfCustomer;
@@ -8,6 +9,7 @@ import com.example.newProject.Repositories.BasicRepos.CustomerRepository;
 import com.example.newProject.Repositories.ModelRepos.ModelAttrOfCustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Service
 public class ModelAttrOfCustomerService {
@@ -21,6 +23,19 @@ public class ModelAttrOfCustomerService {
         this.customerRepository=customerRepository;
     }
 
+
+
+    public ModelAttributesOfCustomer getOneModelAttributeOfCustomer(CustomerAttributeGetDto customerAttributeGetDto){
+        Long customerId= customerAttributeGetDto.getCustomerId();
+        System.out.println(customerId);
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        ModelAttributesOfCustomer attributeToReturn=
+                modelAttrOfCustomerRepo.findByCustomer(customer);
+        return attributeToReturn;
+        //attribute of customer döndük
+
+
+    }
 
 
 

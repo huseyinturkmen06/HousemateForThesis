@@ -1,12 +1,16 @@
 package com.example.newProject.Services.ModelServices;
 
+import com.example.newProject.DTOs.BasicDtos.HouseOwnerAttributeGetDto;
 import com.example.newProject.DTOs.ModelDtos.ModelAttrOfHouseOwnerDto;
+import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfHouseOwner;
 import com.example.newProject.Repositories.BasicRepos.HouseOwnerRepository;
 import com.example.newProject.Repositories.ModelRepos.ModelAttrOfHouseOwnerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class ModelAttrOfHouseOwnerService {
@@ -19,6 +23,20 @@ public class ModelAttrOfHouseOwnerService {
         this.modelAttrOfHouseOwnerRepo = modelAttrOfHouseOwnerRepo;
         this.houseOwnerRepository=houseOwnerRepository;
     }
+
+    //getOneModelAttributeByHouseOwnerId
+    @GetMapping("/getOneModelAttributeByHouseOwnerId")
+    public ModelAttributesOfHouseOwner getOneModelAttributeByHouseOwner(
+            @RequestBody HouseOwnerAttributeGetDto houseOwnerAttributeGetDto){
+        Long ownerId= houseOwnerAttributeGetDto.getHouseOwnerId();
+        HouseOwner owner = houseOwnerRepository.findById(ownerId).orElse(null);
+        ModelAttributesOfHouseOwner attributeToReturn=
+                modelAttrOfHouseOwnerRepo.findByHouseOwner(owner);
+        return attributeToReturn;
+    }
+
+
+
 
     //save one ModelAttribute of houseOwner   (poll)
     public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto){

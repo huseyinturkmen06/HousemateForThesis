@@ -76,4 +76,11 @@ house güncellerken luxury attribute ünü de güncellememiz gerek ve henüz
 house güncelleme hazırlamamışız, onu da halletmemiz lazım
 
 
+"21.00","yes","yes","1-10","1.00-4.00","18-26","2-20","5000"
+saat, smooking,having an pet, luxury, gpa,age,renting duration,price
+
+
+15 dk aralıklara
+
+
 
