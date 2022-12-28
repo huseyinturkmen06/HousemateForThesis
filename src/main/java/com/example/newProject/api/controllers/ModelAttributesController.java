@@ -1,5 +1,7 @@
 package com.example.newProject.api.controllers;
 
+import com.example.newProject.DTOs.BasicDtos.CustomerAttributeGetDto;
+import com.example.newProject.DTOs.BasicDtos.HouseOwnerAttributeGetDto;
 import com.example.newProject.DTOs.ModelDtos.ModelAttrOfCustomerDto;
 import com.example.newProject.DTOs.ModelDtos.ModelAttrOfHouseOwnerDto;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfCustomer;
@@ -10,10 +12,7 @@ import com.example.newProject.Services.ModelServices.ModelAttrOfCustomerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseOwnerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/models")
@@ -67,11 +66,19 @@ public class ModelAttributesController {
 
     }
 
-    //saveOneHouseAttribute
-    //house attributeleri bir post ile değil,
-    //kendisinde kalan houseowner ların attributeleri ortalaması ile olacak
+    //getOneModelAttributeByCustomerId
+    @GetMapping("/getOneModelAttributeByCustomerId")
+    public ModelAttributesOfCustomer getOneModelAttributeOfCustomer(
+            @RequestBody CustomerAttributeGetDto customerAttributeGetDto){
+            return modelAttrOfCustomerService.getOneModelAttributeOfCustomer(customerAttributeGetDto);
+    }
 
-    //bu  anketlerin update işlemleri daha sonra yazılacak
+    //getOneModelAttributeByHouseOwnerId
+    @GetMapping("/getOneModelAttributeByHouseOwnerId")
+    public ModelAttributesOfHouseOwner getOneModelAttributeByHouseOwner(
+            @RequestBody HouseOwnerAttributeGetDto houseOwnerAttributeGetDto){
+        return modelAttrOfHouseOwnerService.getOneModelAttributeByHouseOwner(houseOwnerAttributeGetDto);
+    }
 
 
 
