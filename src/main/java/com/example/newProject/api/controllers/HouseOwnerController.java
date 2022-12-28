@@ -6,9 +6,11 @@ import com.example.newProject.DTOs.BasicDtos.HouseOwnerUpdateDto;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Services.BasicServices.HouseOwnerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -62,7 +64,7 @@ public class HouseOwnerController {
 
     //updateOneOwner
     @PutMapping("/updateOneHouseOwner")
-    public HouseOwner updateOneHouseOwner(@RequestBody HouseOwnerUpdateDto houseOwnerUpdateDto){
+    public HouseOwner updateOneHouseOwner(@RequestBody HouseOwnerUpdateDto houseOwnerUpdateDto) throws JSONException, IOException, InterruptedException {
         HouseOwner updatedHouseOwner=houseOwnerService.updateOneHouseOwner(houseOwnerUpdateDto);
         //kullanıya burada house da eklemiş oluruz
         //houseId verince bir house a bir houseOwner eklendiği için

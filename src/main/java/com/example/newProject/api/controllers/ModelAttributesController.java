@@ -11,8 +11,11 @@ import com.example.newProject.Services.BasicServices.HouseOwnerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfCustomerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseOwnerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/models")
@@ -43,7 +46,7 @@ public class ModelAttributesController {
     //saveOrUpdateOneHouseOwnerAttribute
     @PostMapping("/saveOrUpdateOneHouseOwnerAttribute")
     public ModelAttributesOfHouseOwner saveOneHouseOwnerAttribute(
-            @RequestBody ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto){
+            @RequestBody ModelAttrOfHouseOwnerDto modelAttrOfHouseOwnerDto) throws JSONException, IOException, InterruptedException {
 
         ModelAttributesOfHouseOwner attributeToReturn=
                 modelAttrOfHouseOwnerService.saveOneHouseOwnerAttribute(modelAttrOfHouseOwnerDto);
@@ -54,27 +57,32 @@ public class ModelAttributesController {
 //        System.out.println(houseId);
         modelAttrOfHouseService.setAttributesOfOneHouseByOwners(houseId);
         return attributeToReturn;
-        //burası bize farklı şeyler dönebilir
+        //customer ı save ederken house larda bi şey değişmeyeğinden
+        //save or update costomer burası kadar uzun olmadı
     }
 
 
     //saveOneModelAttrOfCustomer
     @PostMapping("/saveOrUpdateOneModelAttrOfCustomer")
     public ModelAttributesOfCustomer saveOneCustomerAttribute(
-            @RequestBody ModelAttrOfCustomerDto modelAttrOfCustomerDto){
+            @RequestBody ModelAttrOfCustomerDto modelAttrOfCustomerDto) throws JSONException, IOException, InterruptedException {
         return modelAttrOfCustomerService.saveOneCustomerAttribute(modelAttrOfCustomerDto);
 
     }
 
     //getOneModelAttributeByCustomerId
-    @GetMapping("/getOneModelAttributeByCustomerId")
+    //burada get isteği yapıyoruz ama kotlinde get mapping ile post atamayacağımız için
+    //otomatikmen bunu da post yaptık
+    @PostMapping("/getOneModelAttributeByCustomerId")
     public ModelAttributesOfCustomer getOneModelAttributeOfCustomer(
             @RequestBody CustomerAttributeGetDto customerAttributeGetDto){
             return modelAttrOfCustomerService.getOneModelAttributeOfCustomer(customerAttributeGetDto);
     }
 
     //getOneModelAttributeByHouseOwnerId
-    @GetMapping("/getOneModelAttributeByHouseOwnerId")
+    //burada get isteği yapıyoruz ama kotlinde get mapping ile post atamayacağımız için
+    //otomatikmen bunu da post yaptık
+    @PostMapping("/getOneModelAttributeByHouseOwnerId")
     public ModelAttributesOfHouseOwner getOneModelAttributeByHouseOwner(
             @RequestBody HouseOwnerAttributeGetDto houseOwnerAttributeGetDto){
         return modelAttrOfHouseOwnerService.getOneModelAttributeByHouseOwner(houseOwnerAttributeGetDto);

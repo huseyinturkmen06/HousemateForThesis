@@ -4,14 +4,17 @@ import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfHouse;
 import com.example.newProject.Entities.ModelEntities.ModelAttributesOfHouseOwner;
+import com.example.newProject.Model_Integration.PredictionHandler;
 import com.example.newProject.Repositories.BasicRepos.HouseOwnerRepository;
 import com.example.newProject.Repositories.BasicRepos.HouseRepository;
 import com.example.newProject.Repositories.ModelRepos.ModelAttrOfHouseOwnerRepo;
 import com.example.newProject.Repositories.ModelRepos.ModelAttrOfHouseRepo;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Column;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +37,7 @@ public class ModelAttrOfHouseService {
         this.modelAttrOfHouseRepo=modelAttrOfHouseRepo;
     }
 
-    public ModelAttributesOfHouse setAttributesOfOneHouseByOwners(Long houseId){
+    public ModelAttributesOfHouse setAttributesOfOneHouseByOwners(Long houseId) throws JSONException, IOException, InterruptedException {
         System.out.println(houseId);
 
         //find all houses of one house
@@ -159,7 +162,50 @@ public class ModelAttrOfHouseService {
         modelAttributesOfHouse.setHouse(houseTemp);
         //methodun en başında el de ettiğimiz evi de foreign key olarak ayarladık ve en sağa kaydetiik
 
+
+        //*********************************** model class ın ile haberleşme başlangıcı
+//*********************************************************
+
+        String sleepTime=modelAttributesOfHouse.getSleepTime();
+
+        String smooking="";
+        if(modelAttributesOfHouse.getSmooking()==true)  smooking="yes";
+        else smooking="no";
+
+        String havingAPet="";
+        if(modelAttributesOfHouse.getHavingPet()==true) havingAPet="yes";
+        else havingAPet="no";
+
+        String luxuryCare=Integer.toString(modelAttributesOfHouse.getLuxury());
+
+        String gpa=String. valueOf(modelAttributesOfHouse.getGpa());
+
+        //age yerine şimdilik 0 veriyorum çünkü age bizim db de yok
+        String age="0";
+
+        String rentingDuration=Integer.toString(modelAttributesOfHouse.getRentingDuration());
+
+        String price=Integer.toString(modelAttributesOfHouse.getPrice());
+//*********************************************************************
+//*********************************************************************
+
+        //autowired hatasından dolayı methodu static yaptık ve öyle çağırdık
+        //function call
+        String classOfHouse= PredictionHandler.ModelFunction(
+                sleepTime,smooking,havingAPet,luxuryCare, gpa,age,rentingDuration,price);
+
+        //setting model class attribute to saving object
+        modelAttributesOfHouse.setClassOfHouse(classOfHouse);
+
+
+
+
+
+
+
+
         return modelAttrOfHouseRepo.save(modelAttributesOfHouse);
+
         //sonuç olarak bir ev id si verdiğimizde
         //houseOwners dan bu evlerin tüm ownerları bulunur
         //sonra bunların her birisinin attrof houseOwner attributelerinin ortalamalrı ile yeni attr ler ayarlanır
