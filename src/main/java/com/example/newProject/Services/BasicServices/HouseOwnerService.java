@@ -98,7 +98,6 @@ public class HouseOwnerService {
     }
 
     //updateOneOwner
-    //şimdi burası yazılaak
     public HouseOwner updateOneHouseOwner(HouseOwnerUpdateDto houseOwnerUpdateDto){
         HouseOwner houseOwnerToUpdate= houseOwnerRepository.findById(houseOwnerUpdateDto.getHouseOwnerId()).orElse(null);
         if(houseOwnerToUpdate!=null){

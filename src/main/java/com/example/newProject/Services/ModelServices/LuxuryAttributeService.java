@@ -22,6 +22,8 @@ public class LuxuryAttributeService {
 
 
     //saveOneLuxuryAttributeOfHouse
+    //bunu da save or update e çekmemiz gerekir
+
     public LuxuryAttributesOfHouse saveOneLuxuryAttributeOfHouse(HouseSaveDto houseSaveDto,
                                                                  Long houseId){
         LuxuryAttributesOfHouse luxuryAttributeToSave = new LuxuryAttributesOfHouse();

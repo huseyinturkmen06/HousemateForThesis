@@ -94,13 +94,21 @@ public class HouseService {
 
         return houseToReturn;
     }
+    //house temel bir entity olduğundan ve kimseden foreign key  almadığından
+    //save or update house  diye bir metod yazmıyoruz
+    //sace ve update i ayrı yazıyoruz
 
 
 
 
     //updateOneHouse
+    //houseUpdate DTO alacak, tüm özelliklerin yanında bir de houseId
+    //gelen attributeler ile hem luxury hem de house un normal özellikleri de güncellenecek
+
     public House updateOneHouse(HouseSaveDto houseSaveDto){
         House houseToSave= new House();
+
+
         return null;
     }
 

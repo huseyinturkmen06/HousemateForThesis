@@ -65,7 +65,7 @@ public class House {
 
     //****************************************************
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(mappedBy = "house")
     private List<HouseOwner> owners;
 
