@@ -83,4 +83,8 @@ saat, smooking,having an pet, luxury, gpa,age,renting duration,price
 15 dk aralıklara
 
 
+luxury attribute ü güncellemek için direkt house u güncelliyoruz
+//yani house güncellendiğinde luxury attribute e güncellenmeli
+
+
 
