@@ -2,6 +2,7 @@ package com.example.newProject.api.controllers;
 
 
 import com.example.newProject.DTOs.BasicDtos.CreateRelationDto;
+import com.example.newProject.DTOs.BasicDtos.DeleteRelationDto;
 import com.example.newProject.DTOs.BasicDtos.LikeControlDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
@@ -36,10 +37,7 @@ public class HavingRelationController {
 //        return houseService.getRalationsOfOneCustomer(id);
 //    }
 
-    @PostMapping("/createOneRelation")
-    public HouseCustomer createOneRelation(@RequestBody CreateRelationDto createRelationDto){
-        return houseCustomerService.createOneRelation(createRelationDto);
-    }
+
 
 
     @GetMapping("/getAllHousesOfOneCustomer/{customerId}")
@@ -55,9 +53,21 @@ public class HavingRelationController {
     }
 
 
+    @PostMapping("/createOneRelation")
+    public HouseCustomer createOneRelation(@RequestBody CreateRelationDto createRelationDto){
+        return houseCustomerService.createOneRelation(createRelationDto);
+    }
+
+
     @PostMapping("/likeControl")
     public Boolean likeControl(@RequestBody LikeControlDto likeControlDto){
         return houseCustomerService.likeControl(likeControlDto);
     }
+
+    @DeleteMapping("/deleteRelation")
+    public void deleteOneRelation(@RequestBody DeleteRelationDto deleteRelationDto){
+        houseCustomerService.deleteOneRelation(deleteRelationDto);
+    }
+
 
 }
