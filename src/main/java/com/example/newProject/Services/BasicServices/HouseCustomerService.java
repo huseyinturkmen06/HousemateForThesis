@@ -1,6 +1,7 @@
 package com.example.newProject.Services.BasicServices;
 
 import com.example.newProject.DTOs.BasicDtos.CreateRelationDto;
+import com.example.newProject.DTOs.BasicDtos.DeleteRelationDto;
 import com.example.newProject.DTOs.BasicDtos.LikeControlDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
@@ -99,6 +100,13 @@ public class HouseCustomerService {
             //key i true yapıyoruz, yoksa false kalır
         }
         return keyToReturn;
+    }
+
+    public void deleteOneRelation(DeleteRelationDto deleteRelationDto){
+        House house= houseRepository.findById(deleteRelationDto.getHouseId()).orElse(null);
+        Customer customer = customerRepository.findById(deleteRelationDto.getCustomerId()).orElse(null);
+        HouseCustomer relationToDelete = houseCustomerRepo.findByHouseAndCustomer(house,customer);
+        houseCustomerRepo.delete(relationToDelete);
     }
 
 
