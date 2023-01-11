@@ -60,7 +60,11 @@ public class HouseController {
     //updateOneHouse
     //bunu service içinde yazdım ama bazı kontroller yapıp buraya eklicem
 
-    
+
+    @GetMapping("/getHousesByClass/{classOfHouse}")
+    public List<House> getHousesByClass(@PathVariable String classOfHouse){
+        return houseService.getHousesByClass(classOfHouse);
+    }
 
 
 
