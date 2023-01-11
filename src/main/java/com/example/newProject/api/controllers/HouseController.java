@@ -52,6 +52,12 @@ public class HouseController {
     //ve luxury of house tablosuna da ekleme yapıyoruz
 
 
+    @GetMapping("/getOneHouseById/{houseId}")
+    public House getOneHouseByHouseId(@PathVariable Long houseId){
+        return houseService.getOneHouseById(houseId);
+    }
+
+
 
 
     //updateOneHouse
