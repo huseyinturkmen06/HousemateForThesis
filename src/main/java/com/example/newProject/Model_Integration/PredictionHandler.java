@@ -26,7 +26,8 @@ public class PredictionHandler {
         json.put("Having a pet",having_a_pet);
         json.put("Luxury Care",luxury_care);
         json.put("GPA",GPA);
-        json.put("Age",age);
+//        json.put("Age",age);
+        //age i göndermedik
         json.put("Renting Duration",renting_duration);
         json.put("Price",price);
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
@@ -39,7 +40,9 @@ public class PredictionHandler {
             request.setEntity(params);
             ResponseHandler<String> responseHandler=new BasicResponseHandler();
             String responseBody = httpClient.execute(request,responseHandler);
+            //isteği icra edip gelen response body yi cavap olaral alırız
             prediction_value = responseBody;
+            System.out.println(prediction_value);
             JSONObject response=new JSONObject(responseBody);
             //System.out.println(response);
 // handle response here...
@@ -48,6 +51,7 @@ public class PredictionHandler {
         } finally {
             httpClient.close();
         }
+        System.out.println(prediction_value);
         return prediction_value;
         //burada şimdilik deneme string i döner
     }
@@ -65,11 +69,18 @@ public class PredictionHandler {
                                 String rentingDuration,String price)
             throws IOException, InterruptedException, JSONException {
 
-        String prediction = "deneme2";
+        System.out.println("sending satas:");
+        System.out.println( sleepTime+"\n"+ smooking+"\n"+ havingAPet+"\n"+
+                 luxuryCare+"\n"+ gpa+"\n"+ age+"\n"+
+                 rentingDuration+"\n"+ price);
 
-//        Trials.useThis3(sleepTime,smooking,havingAPet,luxuryCare,gpa,age,rentingDuration,price);
-//        prediction = prediction.replace("[","").
-//                replace("]","").replace("\'","");
+//        String prediction = "deneme2";
+
+        String prediction =PredictionHandler.useThis3(sleepTime,smooking,havingAPet,luxuryCare,gpa,age,rentingDuration,price);
+        prediction = prediction.replace("[","").
+                replace("]","").replace("\'","");
+
+
         //predictionu buraya eşitleyeecğiz
 
      return prediction;

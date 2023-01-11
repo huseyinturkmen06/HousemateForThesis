@@ -198,11 +198,7 @@ public class ModelAttrOfHouseService {
         modelAttributesOfHouse.setClassOfHouse(classOfHouse);
 
 
-
-
-
-
-
+//buraya veri gelmiyor henüz
 
         return modelAttrOfHouseRepo.save(modelAttributesOfHouse);
 

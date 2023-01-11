@@ -76,6 +76,9 @@ public class ModelAttrOfHouseOwnerService {
 
             String sleepTime=modelAttrOfHouseOwnerDto.getSleepTime();
 
+            System.out.println("sleep time geliyor mu?");
+            System.out.println(sleepTime+"\n");
+
             String smooking="";
             if(modelAttrOfHouseOwnerDto.getSmooking()==true)  smooking="yes";
             else smooking="no";
