@@ -2,6 +2,7 @@ package com.example.newProject.api.controllers;
 
 
 import com.example.newProject.DTOs.BasicDtos.CreateRelationDto;
+import com.example.newProject.DTOs.BasicDtos.LikeControlDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
@@ -51,6 +52,12 @@ public class HavingRelationController {
     @GetMapping("/getAllCustomersOfOneHouse/{houseId}")
     public List<Customer> getAllCustomersOfOneHouse(@PathVariable Long houseId){
         return houseCustomerService.getAllCustomersOfOneHouse(houseId);
+    }
+
+
+    @PostMapping("/likeControl")
+    public Boolean likeControl(@RequestBody LikeControlDto likeControlDto){
+        return houseCustomerService.likeControl(likeControlDto);
     }
 
 }

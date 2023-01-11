@@ -1,6 +1,7 @@
 package com.example.newProject.Services.BasicServices;
 
 import com.example.newProject.DTOs.BasicDtos.CreateRelationDto;
+import com.example.newProject.DTOs.BasicDtos.LikeControlDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
@@ -83,6 +84,31 @@ public class HouseCustomerService {
 
         return allCustomersOfOneHouse;
     }
+
+
+    //kullanıcı ile ev arasında bir beğenme ilişkisi var mı diye kontrol eden method
+    public Boolean likeControl(LikeControlDto likeControlDto){
+        List<Customer> customersOfHouse= getAllCustomersOfOneHouse(likeControlDto.getHouseId());
+        Boolean keyToReturn=false;
+        Customer customerToControl = customerRepository.findById(likeControlDto.getCustomerId()).orElse(null);
+        for(Customer customer:customersOfHouse){
+            if(customerToControl==customer){
+                keyToReturn = true;
+            };
+            //DTo ile alınan customerToControl house'u beğenen customer ların herhangi birisiyle eşleşirse
+            //key i true yapıyoruz, yoksa false kalır
+        }
+        return keyToReturn;
+    }
+
+
+
+
+
+
+
+
+
 
 
 }
