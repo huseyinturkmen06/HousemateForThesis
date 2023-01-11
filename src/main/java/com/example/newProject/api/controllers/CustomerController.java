@@ -61,6 +61,14 @@ public class CustomerController {
 
     //updatePasswordOfOneUser
 
+    //kullanıcı house a tıklamış mı diye kontrol edecek endpoint
+    // house a id nin kaydı ile relation çekilcek
+    //o relationun customer ı elimizdeki customer ile aynı ise true dönecek
+    //kullanıcı bir evi beğenince birden fazla beğenirse tabloda fazladan kayıt oluşuyor
+
+
+
+
 
 
 }
