@@ -12,4 +12,5 @@ public interface ModelAttrOfCustomerRepo extends JpaRepository<ModelAttributesOf
 
 
 
+
 }

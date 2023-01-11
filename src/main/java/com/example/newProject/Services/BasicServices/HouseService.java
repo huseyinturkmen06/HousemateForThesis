@@ -5,9 +5,11 @@ import com.example.newProject.DTOs.BasicDtos.HouseSaveDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
+import com.example.newProject.Entities.ModelEntities.ModelAttributesOfHouse;
 import com.example.newProject.Repositories.BasicRepos.CustomerRepository;
 import com.example.newProject.Repositories.BasicRepos.HavingRelationRepository;
 import com.example.newProject.Repositories.BasicRepos.HouseRepository;
+import com.example.newProject.Repositories.ModelRepos.ModelAttrOfHouseRepo;
 import com.example.newProject.Services.ModelServices.LuxuryAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,20 +19,23 @@ import java.util.List;
 
 @Service
 public class HouseService {
-    HouseRepository houseRepository;
-    HavingRelationRepository havingRelationRepository;
-    CustomerRepository customerRepository;
-    LuxuryAttributeService luxuryAttributeService;
+    private HouseRepository houseRepository;
+    private HavingRelationRepository havingRelationRepository;
+    private CustomerRepository customerRepository;
+    private LuxuryAttributeService luxuryAttributeService;
+    private ModelAttrOfHouseRepo modelAttrOfHouseRepo;
 
     @Autowired
     public HouseService(HouseRepository houseRepository,
                         HavingRelationRepository havingRelationRepository,
                         CustomerRepository customerRepository,
-                        LuxuryAttributeService luxuryAttributeService) {
+                        LuxuryAttributeService luxuryAttributeService,
+                        ModelAttrOfHouseRepo modelAttrOfHouseRepo) {
         this.houseRepository = houseRepository;
         this.havingRelationRepository = havingRelationRepository;
         this.customerRepository = customerRepository;
         this.luxuryAttributeService=luxuryAttributeService;
+        this.modelAttrOfHouseRepo=modelAttrOfHouseRepo;
     }
 
     public List<HouseCustomer> getRalationsOfOneCustomer(Long id){
@@ -97,6 +102,20 @@ public class HouseService {
 
 
         return null;
+    }
+
+
+    //1 class isminin tüm kayıtlarını getiren metod
+    public List<House> getHousesByClass(String classOfHouse){
+        ArrayList<ModelAttributesOfHouse> allAttributeRecordsOfClass= modelAttrOfHouseRepo.findAllByClassOfHouse(classOfHouse);
+        //şimdi bir class ın tüm attribute kayıtlarını aldık
+        //bunların da her birisinin evini almamız gerek
+        ArrayList<House> housesToReturn= new ArrayList<>();
+
+        for(ModelAttributesOfHouse record: allAttributeRecordsOfClass){
+            housesToReturn.add(record.getHouse());
+        }
+        return housesToReturn;
     }
 
 
