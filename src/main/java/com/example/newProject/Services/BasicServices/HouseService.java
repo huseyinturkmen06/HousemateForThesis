@@ -39,20 +39,7 @@ public class HouseService {
     }
 
 
-    //special method
-    //Get all houses of one customer
-    public List<House> getAllHousesOfOneCustomer(Long id){
-        Customer customer = customerRepository.findById(id).orElse(null);
-        List<HouseCustomer> relaions=havingRelationRepository.findHavingRelationsByCustomer(customer);
-        //fe found all relations of one customer
-        List<House> allHousesOfOneUser=new ArrayList<>();
-        for(HouseCustomer relation: relaions){
-            allHousesOfOneUser.add(relation.getHouse());
-        }
-        //we found all houses of one customer
 
-        return allHousesOfOneUser;
-    }
 
 
     //Get all houses
