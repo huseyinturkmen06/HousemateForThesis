@@ -26,11 +26,7 @@ public class CustomerController {
     }
 
 
-    //özel metod
-    @GetMapping("/getAllCustomersOfOneHouse/{houseId}")
-    public List<Customer> getAllCustomersOfOneHouse(@PathVariable Long houseId){
-        return customerService.getAllCustomersOfOneHouse(houseId);
-    }
+
 
 
     @GetMapping("/getAllCustomers")

@@ -25,10 +25,7 @@ public class HouseController {
         this.customerService=customerService;
     }
 
-    @GetMapping("/getAllHousesOfOneCustomer/{customerId}")
-    public List<House> getAllHousesOfOneCustomer(@PathVariable Long customerId){
-        return houseService.getAllHousesOfOneCustomer(customerId);
-    }
+
 
     //getAllHouses
     @GetMapping("/getAllHouses")
@@ -62,6 +59,8 @@ public class HouseController {
 
     //updateOneHouse
     //bunu service içinde yazdım ama bazı kontroller yapıp buraya eklicem
+
+    
 
 
 
