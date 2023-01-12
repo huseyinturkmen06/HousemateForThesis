@@ -65,9 +65,11 @@ public class HavingRelationController {
     }
 
     @DeleteMapping("/deleteRelation")
-    public void deleteOneRelation(@RequestBody DeleteRelationDto deleteRelationDto){
-        houseCustomerService.deleteOneRelation(deleteRelationDto);
+    public HouseCustomer deleteOneRelation(@RequestBody DeleteRelationDto deleteRelationDto){
+        return houseCustomerService.deleteOneRelation(deleteRelationDto);
     }
+
+
 
 
 }

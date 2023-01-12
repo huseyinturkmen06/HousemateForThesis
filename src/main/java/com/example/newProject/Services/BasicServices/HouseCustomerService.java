@@ -102,11 +102,12 @@ public class HouseCustomerService {
         return keyToReturn;
     }
 
-    public void deleteOneRelation(DeleteRelationDto deleteRelationDto){
+    public HouseCustomer deleteOneRelation(DeleteRelationDto deleteRelationDto){
         House house= houseRepository.findById(deleteRelationDto.getHouseId()).orElse(null);
         Customer customer = customerRepository.findById(deleteRelationDto.getCustomerId()).orElse(null);
         HouseCustomer relationToDelete = houseCustomerRepo.findByHouseAndCustomer(house,customer);
         houseCustomerRepo.delete(relationToDelete);
+        return relationToDelete;
     }
 
 
