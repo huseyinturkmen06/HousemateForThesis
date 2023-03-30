@@ -117,6 +117,11 @@ public class ModelAttrOfCustomerService {
             String classOfCustomer= PredictionHandler.ModelFunction(
                     sleepTime,smooking,havingAPet,luxuryCare, gpa,age,rentingDuration,price);
 
+
+//            public static String ModelFunction(String sleepTime,String smooking,String havingAPet,
+//                    String luxuryCare,String gpa,String age,
+//                    String rentingDuration,String price)
+
             //setting model class attribute to saving object
             attrOfCustomerToSave.setClassOfCustomer(classOfCustomer);
 
