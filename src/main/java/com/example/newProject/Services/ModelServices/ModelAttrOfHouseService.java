@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.Column;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -47,9 +48,12 @@ public class ModelAttrOfHouseService {
         List<Integer> luxuries= new ArrayList<>();
         List<Double> gpas= new ArrayList<>();
         List<Integer> rentingDurations= new ArrayList<>();
+        List<Integer> prices = new ArrayList<>();
 
         House houseTemp = houseRepository.findById(houseId).orElse(null);
+        //house u bulduk
         List<HouseOwner> allOwnersOfHouse = houseOwnerRepository.findAllByHouse(houseTemp);
+        //1 house un tüm owner larını bulduk
 //        System.out.println(allOwnersOfHouse.get(0).getOwnerName());
 
         //örneğin 1 id li evin tüm owner larını almış olduk
@@ -72,6 +76,9 @@ public class ModelAttrOfHouseService {
             luxuries.add(attribute.getLuxury());
             gpas.add(attribute.getGpa());
             rentingDurations.add(attribute.getRentingDuration());
+            prices.add(attribute.getPrice());
+
+            //1 evin tüm howner ları için listelere ekleme yaptık
         }
 
 
@@ -85,12 +92,68 @@ public class ModelAttrOfHouseService {
         Double ModelLuxuryAttrOfHouse;
         Double ModelGpaAttrOfHouse;
         Double ModelRentingDurationAttrOfHouse;
+        Double ModelPriceAttrOfHouse;
+
+
+        ModelSleepTimeAttrOfHouse="22.00";
+
 
 //***********************************
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
         //şimdi setleme işlemlerini yapalım
 
-        //--
-        ModelSleepTimeAttrOfHouse="";
+
+        //saat setleme-----------------------------------------
+
+
+
+        List<Integer> earlyTimes= new ArrayList<>();
+        List<Integer> lateTimes= new ArrayList<>();
+        //uyku zamanlarını ayarlayan int dizisi  22.00    06.10   00.00   6.10   00.00 18.30
+        for(String temporarySleepTime:sleepTimes){
+            if(temporarySleepTime.startsWith("0")){
+                temporarySleepTime.replaceFirst("0","");
+                //06.00 gibi girdilerden kurtulmak için
+            }
+            //0.00   22.00   6.10
+
+
+            Integer ilkPartInt=   Integer.valueOf(temporarySleepTime.split("[.]")[0])  ;
+//            System.out.println();
+            if(ilkPartInt<=23 && ilkPartInt >=18){
+                earlyTimes.add( Integer.valueOf(temporarySleepTime.split("[.]")[0])  );
+            }
+            else if(ilkPartInt<=7 && ilkPartInt>=0){
+                lateTimes.add( Integer.valueOf(temporarySleepTime.split("[.]")[0])  );
+            }
+            else{
+                ModelSleepTimeAttrOfHouse="22.00";
+                //herhangi bir bloğa girmezse otomatik 22.00 a eşitledik
+            }
+
+
+            //şimdi bir evde oturanların yatma saatlerini late times ve early times a attık
+        }
+
+        if(lateTimes.size()>0){
+            //1   2   3
+            Integer intSaat= Collections.max(lateTimes);
+            ModelSleepTimeAttrOfHouse= "0"+intSaat.toString()+"."+"00";
+            //01.00
+        }
+        else {
+            Integer intSaat= Collections.max(earlyTimes);
+            ModelSleepTimeAttrOfHouse= intSaat.toString()+"."+"00";
+        }
+
+
+/////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
 
         //--
         if(smookings.contains(Boolean.TRUE)){
@@ -111,16 +174,24 @@ public class ModelAttrOfHouseService {
         //--
         ModelLuxuryAttrOfHouse = luxuries.stream().mapToDouble(d -> d).average().orElse(0.0);
         //double ama altta intValue(); yapıyorum
-
+        //lüxlik değerlerini listenin ortalaması yapıyoruz ama ileride değişir
 
 
         //--
         ModelGpaAttrOfHouse = gpas.stream().mapToDouble(d -> d).average().orElse(0.0);
         //burada hata alabiliriz ama incelenecek
+        //ortalamaları da hepsinin ortralaması yapyoruz
 
         //--
         ModelRentingDurationAttrOfHouse = rentingDurations.stream().mapToDouble(d -> d).average().orElse(0.0);
         //double ama altta intValue(); yapıyorum
+        //renting durationslar da ortalama oluyor
+        //burada double ama aşağıda int yaptım
+        System.out.println("Renting duration: "+ ModelRentingDurationAttrOfHouse);
+
+
+        ModelPriceAttrOfHouse = prices.stream().mapToDouble(d -> d).average().orElse(0.0);
+        //şimdlik price yerine price ların ortalamasını aldık
 
 //***********************************
         //evin tüm attributeleri hazırlandı, şimdi setleme zamanı
@@ -143,10 +214,13 @@ public class ModelAttrOfHouseService {
         modelAttributesOfHouse.setGpa(ModelGpaAttrOfHouse);
         modelAttributesOfHouse.setRentingDuration(ModelRentingDurationAttrOfHouse.intValue());
 
+        modelAttributesOfHouse.setPrice(ModelPriceAttrOfHouse.intValue());
+
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        modelAttributesOfHouse.setPrice(3000);
+//        modelAttributesOfHouse.setPrice(3000);
+        //burayı artık ortalamaya göre yazıyoruz
         //++++++++++++++++++++
         //normalde bir houseEklendiğinde otomatikmen Luxury attibute of house tablosuna da
         //house un model özellikleri eklenmeli ve sonra yeni kullanıcı eklenince burası güncellenmeli ama
@@ -186,6 +260,7 @@ public class ModelAttrOfHouseService {
         String rentingDuration=Integer.toString(modelAttributesOfHouse.getRentingDuration());
 
         String price=Integer.toString(modelAttributesOfHouse.getPrice());
+        //burası default 3000 geliyo ama değşmesi gerek
 //*********************************************************************
 //*********************************************************************
 
@@ -196,6 +271,7 @@ public class ModelAttrOfHouseService {
 
         //setting model class attribute to saving object
         modelAttributesOfHouse.setClassOfHouse(classOfHouse);
+        System.out.println("Evin class ı ::   "+classOfHouse);
 
 
 //buraya veri gelmiyor henüz
