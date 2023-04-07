@@ -93,7 +93,7 @@ public class PredictionHandler {
 //        String value = sendGET("22.00","no","yes","2","3.45","","17","9000");
 //        System.out.println(value);
         //useThis3("22.00","no","no","5","3.45","null","17","9000");
-        System.out.println(ModelFunction("22.00", "no", "yes", "2", "3.45", "", "17", "9000"));
+//        System.out.println(ModelFunction("22.00", "no", "yes", "2", "3.45", "", "17", "9000"));
     }
 
     public static String ModelFunction(String sleepTime,String smooking,String havingAPet,
@@ -108,14 +108,14 @@ public class PredictionHandler {
 
 //        String prediction = "deneme2";
 
-        String prediction =PredictionHandler.sendGET(sleepTime,smooking,havingAPet,luxuryCare,gpa,age,rentingDuration,price);
-        prediction = prediction.replace("[","").
-                replace("]","").replace("\'","");
+//        String prediction =PredictionHandler.sendGET(sleepTime,smooking,havingAPet,luxuryCare,gpa,age,rentingDuration,price);
+//        prediction = prediction.replace("[","").
+//                replace("]","").replace("\'","");
 
 
         //predictionu buraya eşitleyeecğiz
 
-        return prediction;
+        return "temporal_text";
 
 
     }
