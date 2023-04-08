@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.Column;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,38 +39,27 @@ public class ModelAttrOfHouseService {
         this.modelAttrOfHouseRepo=modelAttrOfHouseRepo;
     }
 
-    public ModelAttributesOfHouse setAttributesOfOneHouseByOwners(Long houseId) throws JSONException, IOException, InterruptedException {
-        System.out.println(houseId);
 
-        //find all houses of one house
-        List<String> sleepTimes= new ArrayList<>();
-        List<Boolean> smookings= new ArrayList<>();
-        List<Boolean> havingPets= new ArrayList<>();
-        List<Integer> luxuries= new ArrayList<>();
-        List<Double> gpas= new ArrayList<>();
-        List<Integer> rentingDurations= new ArrayList<>();
-        List<Integer> prices = new ArrayList<>();
+    //find all houses of one house
+    static List<String> sleepTimes= new ArrayList<>();
+    static List<Boolean> smookings= new ArrayList<>();
+    static List<Boolean> havingPets= new ArrayList<>();
+    static List<Integer> luxuries= new ArrayList<>();
+    static List<Double> gpas= new ArrayList<>();
+    static List<Integer> rentingDurations= new ArrayList<>();
+    static List<Integer> prices = new ArrayList<>();
 
-        House houseTemp = houseRepository.findById(houseId).orElse(null);
-        //house u bulduk
-        List<HouseOwner> allOwnersOfHouse = houseOwnerRepository.findAllByHouse(houseTemp);
-        //1 house un tüm owner larını bulduk
-//        System.out.println(allOwnersOfHouse.get(0).getOwnerName());
 
-        //örneğin 1 id li evin tüm owner larını almış olduk
-
-        int countOfCustomerOfHouse=allOwnersOfHouse.size();
-        //burada bir evin kaç customer ı olduğunu görüyoruz ki bölme işlemini ona göre yapalım
-
+    public void fillAllListsOfOwnersOfTheHouse(List<HouseOwner> allOwnersOfHouse){
+        //fill all lists with houseOwner attributes of the house
+        //for its all houseOwners
         for(HouseOwner houseOwner:allOwnersOfHouse){
             //buraya geldiğimizde houseOwnerların attributeleri setlenmemiş oluyor
             //ama buraya gelmeden anket de doldurulmuş olunacağı için bu sefer nul gelmez
 
             ModelAttributesOfHouseOwner attribute=modelAttrOfHouseOwnerRepo.findByHouseOwner(houseOwner);
-            System.out.println("--------------------");
-            System.out.println(attribute.getGpa());
-            //üstteki satır bize 1 kayıt döner ama içinde attributeleri var tabi
-            //her bir owner ın model attributelerine erişiyoruz
+            //iterate every attributes of every owner
+
             sleepTimes.add(attribute.getSleepTime());
             smookings.add(attribute.getSmooking());
             havingPets.add(attribute.getSmooking());
@@ -77,142 +67,81 @@ public class ModelAttrOfHouseService {
             gpas.add(attribute.getGpa());
             rentingDurations.add(attribute.getRentingDuration());
             prices.add(attribute.getPrice());
-
-            //1 evin tüm howner ları için listelere ekleme yaptık
         }
+    }
 
 
-        //şimdlik sleep time attribute unu boş ayarlıyoruz!!!!!!!!!!!!
-        //daha sonra nasıl tutulacağına karar veririz
+    public String calculateAverageSleepTimes(List<String> sleepTimes){
+        LocalTime sum = LocalTime.MIN;
+        for (String clock : sleepTimes) {
+            sum = sum.plusHours(LocalTime.parse(clock).getHour())
+                    .plusMinutes(LocalTime.parse(clock).getMinute());
+        }
+        int averageHour = sum.getHour() / sleepTimes.size();
+        int averageMinute = sum.getMinute() / sleepTimes.size();
+        return String.format("%02d:%02d", averageHour, averageMinute);
+        //returns average of given times as "08:30", "09:45", "10:15"
 
+    }
+
+    public ModelAttributesOfHouse setAttributesOfOneHouseByOwners(Long houseId) throws JSONException, IOException, InterruptedException {
+
+
+        House houseTemp = houseRepository.findById(houseId).orElse(null);
+        //temporary houe
+
+        List<HouseOwner> allOwnersOfHouse = houseOwnerRepository.findAllByHouse(houseTemp);
+        //all owners of one house
+
+        int countOfCustomerOfHouse=allOwnersOfHouse.size();
+        //customer count of the house , use it very later
+
+        fillAllListsOfOwnersOfTheHouse(allOwnersOfHouse);
+        //filled all owner attributes list of the house
+
+        //  PREPARING ATTRIBUTES OF HOUSE
 
         String ModelSleepTimeAttrOfHouse;
         Boolean ModelSmokingAttrOfHouse;
         Boolean ModelHavingPetAttrOfHouse;
-        Double ModelLuxuryAttrOfHouse;
+        Integer ModelLuxuryAttrOfHouse;
         Double ModelGpaAttrOfHouse;
-        Double ModelRentingDurationAttrOfHouse;
-        Double ModelPriceAttrOfHouse;
+        Integer ModelRentingDurationAttrOfHouse;
+        Integer ModelPriceAttrOfHouse;
 
+        ModelSleepTimeAttrOfHouse= calculateAverageSleepTimes(ModelAttrOfHouseService.sleepTimes);
 
-        ModelSleepTimeAttrOfHouse="22.00";
+        if(smookings.contains(Boolean.TRUE))    ModelSmokingAttrOfHouse= Boolean.TRUE;
+        else ModelSmokingAttrOfHouse= Boolean.FALSE;
 
+        if(havingPets.contains(Boolean.TRUE)) ModelHavingPetAttrOfHouse= Boolean.TRUE;
+        else ModelHavingPetAttrOfHouse= Boolean.FALSE;
 
-//***********************************
-        /////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-        //şimdi setleme işlemlerini yapalım
-
-
-        //saat setleme-----------------------------------------
-
-
-
-        List<Integer> earlyTimes= new ArrayList<>();
-        List<Integer> lateTimes= new ArrayList<>();
-        //uyku zamanlarını ayarlayan int dizisi  22.00    06.10   00.00   6.10   00.00 18.30
-        for(String temporarySleepTime:sleepTimes){
-            if(temporarySleepTime.startsWith("0")){
-                temporarySleepTime.replaceFirst("0","");
-                //06.00 gibi girdilerden kurtulmak için
-            }
-            //0.00   22.00   6.10
-
-
-            Integer ilkPartInt=   Integer.valueOf(temporarySleepTime.split("[.]")[0])  ;
-//            System.out.println();
-            if(ilkPartInt<=23 && ilkPartInt >=18){
-                earlyTimes.add( Integer.valueOf(temporarySleepTime.split("[.]")[0])  );
-            }
-            else if(ilkPartInt<=7 && ilkPartInt>=0){
-                lateTimes.add( Integer.valueOf(temporarySleepTime.split("[.]")[0])  );
-            }
-            else{
-                ModelSleepTimeAttrOfHouse="22.00";
-                //herhangi bir bloğa girmezse otomatik 22.00 a eşitledik
-            }
-
-
-            //şimdi bir evde oturanların yatma saatlerini late times ve early times a attık
-        }
-
-        if(lateTimes.size()>0){
-            //1   2   3
-            Integer intSaat= Collections.max(lateTimes);
-            ModelSleepTimeAttrOfHouse= "0"+intSaat.toString()+"."+"00";
-            //01.00
-        }
-        else {
-            Integer intSaat= Collections.max(earlyTimes);
-            ModelSleepTimeAttrOfHouse= intSaat.toString()+"."+"00";
-        }
-
-
-/////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-
-        //--
-        if(smookings.contains(Boolean.TRUE)){
-            ModelSmokingAttrOfHouse= Boolean.TRUE;
-        }
-        else {
-            ModelSmokingAttrOfHouse= Boolean.FALSE;
-        }
-
-        //--
-        if(havingPets.contains(Boolean.TRUE)){
-            ModelHavingPetAttrOfHouse= Boolean.TRUE;
-        }
-        else {
-            ModelHavingPetAttrOfHouse= Boolean.FALSE;
-        }
-
-        //--
-        ModelLuxuryAttrOfHouse = luxuries.stream().mapToDouble(d -> d).average().orElse(0.0);
-        //double ama altta intValue(); yapıyorum
+        ModelLuxuryAttrOfHouse = (int) luxuries.stream().mapToDouble(d -> d).average().orElse(0.0);
         //lüxlik değerlerini listenin ortalaması yapıyoruz ama ileride değişir
-
-
-        //--
         ModelGpaAttrOfHouse = gpas.stream().mapToDouble(d -> d).average().orElse(0.0);
         //burada hata alabiliriz ama incelenecek
         //ortalamaları da hepsinin ortralaması yapyoruz
-
-        //--
-        ModelRentingDurationAttrOfHouse = rentingDurations.stream().mapToDouble(d -> d).average().orElse(0.0);
-        //double ama altta intValue(); yapıyorum
-        //renting durationslar da ortalama oluyor
-        //burada double ama aşağıda int yaptım
-        System.out.println("Renting duration: "+ ModelRentingDurationAttrOfHouse);
-
-
-        ModelPriceAttrOfHouse = prices.stream().mapToDouble(d -> d).average().orElse(0.0);
+        ModelRentingDurationAttrOfHouse = (int) rentingDurations.stream().mapToDouble(d -> d).average().orElse(0.0);
+        ModelPriceAttrOfHouse = (int) prices.stream().mapToDouble(d -> d).average().orElse(0.0);
         //şimdlik price yerine price ların ortalamasını aldık
 
 //***********************************
-        //evin tüm attributeleri hazırlandı, şimdi setleme zamanı
-        //model attrıbutes of house ekleyeceiğimiz zaman zaten eklenecek houseId hazır olmalı
-        //eğer model attributes of house tablosunda gereken house nesnesi ile bir kayıt varsa onu güncelle
-        //yoksa yeni modelAttributesOfHouse nesnesi oluştur ve onun kayıtlarını gir
+        //   CREATE HOUSE AND USE ABOVE
 
 
         ModelAttributesOfHouse modelAttributesOfHouse =  modelAttrOfHouseRepo.findByHouse(houseTemp);
         if(modelAttributesOfHouse==null){
             modelAttributesOfHouse=new ModelAttributesOfHouse();
         }
-        //null gelmişse tabloda yok demektir ve yeni kayıt oluşur
+        //if a model attribute of hpuse entry found, use it,  else-> create new one
 
         modelAttributesOfHouse.setSleepTime(ModelSleepTimeAttrOfHouse);
-        //şimdlik böyle yaptık ama daha sonra mutlaka yukarıdakii fonksyionun içindeki değeri başta olmak üzere değişecektir
         modelAttributesOfHouse.setSmooking(ModelSmokingAttrOfHouse);
         modelAttributesOfHouse.setHavingPet(ModelHavingPetAttrOfHouse);
-        modelAttributesOfHouse.setLuxury(ModelLuxuryAttrOfHouse.intValue());
+        modelAttributesOfHouse.setLuxury(ModelLuxuryAttrOfHouse);
         modelAttributesOfHouse.setGpa(ModelGpaAttrOfHouse);
-        modelAttributesOfHouse.setRentingDuration(ModelRentingDurationAttrOfHouse.intValue());
+        modelAttributesOfHouse.setRentingDuration(ModelRentingDurationAttrOfHouse);
 
         modelAttributesOfHouse.setPrice(ModelPriceAttrOfHouse.intValue());
 
@@ -234,47 +163,34 @@ public class ModelAttrOfHouseService {
 
         //---------------------------
         modelAttributesOfHouse.setHouse(houseTemp);
-        //methodun en başında el de ettiğimiz evi de foreign key olarak ayarladık ve en sağa kaydetiik
+        // use house as foreign key
 
 
-        //*********************************** model class ın ile haberleşme başlangıcı
-//*********************************************************
+        //USE VALUES AND MANIPULATE THEM FOR AI CLASS,  CONVERT THEM ALL TO STRING
 
         String sleepTime=modelAttributesOfHouse.getSleepTime();
-
         String smooking="";
         if(modelAttributesOfHouse.getSmooking()==true)  smooking="yes";
         else smooking="no";
-
         String havingAPet="";
         if(modelAttributesOfHouse.getHavingPet()==true) havingAPet="yes";
         else havingAPet="no";
-
         String luxuryCare=Integer.toString(modelAttributesOfHouse.getLuxury());
-
-        String gpa=String. valueOf(modelAttributesOfHouse.getGpa());
-
+        String gpa=String.valueOf(modelAttributesOfHouse.getGpa());
         //age yerine şimdilik 0 veriyorum çünkü age bizim db de yok
         String age="0";
-
         String rentingDuration=Integer.toString(modelAttributesOfHouse.getRentingDuration());
-
         String price=Integer.toString(modelAttributesOfHouse.getPrice());
         //burası default 3000 geliyo ama değşmesi gerek
-//*********************************************************************
-//*********************************************************************
 
-        //autowired hatasından dolayı methodu static yaptık ve öyle çağırdık
-        //function call
+        // CALL MODEL FUNCTION FROM Prediction Handler
+
         String classOfHouse= PredictionHandler.ModelFunction(
                 sleepTime,smooking,havingAPet,luxuryCare, gpa,age,rentingDuration,price);
 
-        //setting model class attribute to saving object
         modelAttributesOfHouse.setClassOfHouse(classOfHouse);
         System.out.println("Evin class ı ::   "+classOfHouse);
 
-
-//buraya veri gelmiyor henüz
 
         return modelAttrOfHouseRepo.save(modelAttributesOfHouse);
 
