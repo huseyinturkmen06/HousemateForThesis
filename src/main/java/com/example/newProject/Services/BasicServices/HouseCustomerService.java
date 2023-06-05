@@ -76,18 +76,18 @@ public class HouseCustomerService {
 
 
 /// 05.06.2023
-    public List<Customer> getAllCustomersOfOneHouse(Long houseOwnerId){
-        House house = houseOwnerService.getOneOwnerByOwnerId(houseOwnerId).getHouse();
-        List<HouseCustomer> relaions=havingRelationRepository.findHavingRelationsByHouse(house);
-        //fe found all relations of one house
-        List<Customer> allCustomersOfOneHouse=new ArrayList<>();
-        for(HouseCustomer relation: relaions){
-            allCustomersOfOneHouse.add(relation.getCustomer());
-        }
-        //we found all houses of one customer
-
-        return allCustomersOfOneHouse;
+public List<Customer> getAllCustomersOfOneHouse(Long id){
+    House house = houseRepository.findById(id).orElse(null);
+    List<HouseCustomer> relaions=havingRelationRepository.findHavingRelationsByHouse(house);
+    //fe found all relations of one house
+    List<Customer> allCustomersOfOneHouse=new ArrayList<>();
+    for(HouseCustomer relation: relaions){
+        allCustomersOfOneHouse.add(relation.getCustomer());
     }
+    //we found all houses of one customer
+
+    return allCustomersOfOneHouse;
+}
 
 
     //kullanıcı ile ev arasında bir beğenme ilişkisi var mı diye kontrol eden method

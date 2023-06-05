@@ -47,9 +47,9 @@ public class HavingRelationController {
 
 
     //özel metod, şimdilik lazım değil
-    @GetMapping("/getAllCustomersOfOneHouse/{houseOwnerId}")
-    public List<Customer> getAllCustomersOfOneHouse(@PathVariable Long houseOwnerId){
-        return houseCustomerService.getAllCustomersOfOneHouse(houseOwnerId);
+    @GetMapping("/getAllCustomersOfOneHouse/{houseId}") //evimi beğenen bütün kullanıcılar
+    public List<Customer> getAllCustomersOfOneHouse(@PathVariable Long houseId){
+        return houseCustomerService.getAllCustomersOfOneHouse(houseId);
     }
 
 
