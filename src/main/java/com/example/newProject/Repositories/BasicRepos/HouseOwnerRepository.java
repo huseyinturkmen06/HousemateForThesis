@@ -11,4 +11,6 @@ public interface HouseOwnerRepository extends JpaRepository<HouseOwner,Long> {
 
     List<HouseOwner> findAllByHouse(House house);
 
+    HouseOwner findHouseOwnerByOwnerId(Long houseOwnerId);
+
 }

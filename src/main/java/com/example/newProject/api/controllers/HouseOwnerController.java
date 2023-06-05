@@ -3,6 +3,7 @@ package com.example.newProject.api.controllers;
 
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerRegisterDto;
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerUpdateDto;
+import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Services.BasicServices.HouseOwnerService;
 import com.example.newProject.Services.ModelServices.ModelAttrOfHouseService;
@@ -34,6 +35,11 @@ public class HouseOwnerController {
     @GetMapping("/getAllHouseOwners")
     public List<HouseOwner> getAllHouseOwners(){
         return houseOwnerService.getAllOwners();
+    }
+
+    @GetMapping("/getHouseOfHouseOwner/{houseOwnerId}")
+    public House getHouseIdOfHouseOwner(@PathVariable Long houseOwnerId){
+        return houseOwnerService.getHouseOfHouseOwner(houseOwnerId);
     }
 
     //getOneOwnerById

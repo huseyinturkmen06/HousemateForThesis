@@ -132,6 +132,10 @@ public class HouseOwnerService {
         }
     }
 
+    public House getHouseOfHouseOwner(Long houseOwnerId) {
+        return houseOwnerRepository.findHouseOwnerByOwnerId(houseOwnerId).getHouse();
+    }
+
     //updatePasswordOfOneOwner
 
 
