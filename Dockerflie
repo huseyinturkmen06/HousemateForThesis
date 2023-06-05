@@ -1,4 +1,0 @@
-FROM maven:3.6.0-jdk-11-slim AS build
-WORKDIR /app
-COPY . /app
-RUN mvn -DoutputFile=target/mvn-dependency-list.log -B -DskipTests clean dependency:list install
