@@ -44,6 +44,7 @@ public class HouseOwnerService {
     public HouseOwner getOneOwnerByOwnerId(Long ownerId){
         HouseOwner houseOwner=houseOwnerRepository.findById(ownerId).orElse(null);
         return houseOwner;
+
     }
 
 

@@ -71,6 +71,8 @@ public class ModelAttrOfHouseService {
     }
 
 
+
+
     public String calculateAverageSleepTimes(List<String> sleepTimes){
         LocalTime sum = LocalTime.MIN;
         for (String clock : sleepTimes) {
@@ -86,6 +88,8 @@ public class ModelAttrOfHouseService {
 
     public ModelAttributesOfHouse setAttributesOfOneHouseByOwners(Long houseId) throws JSONException, IOException, InterruptedException {
 
+
+        System.out.println("text2");
 
         House houseTemp = houseRepository.findById(houseId).orElse(null);
         //temporary houe

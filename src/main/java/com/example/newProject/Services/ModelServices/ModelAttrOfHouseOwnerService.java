@@ -79,6 +79,10 @@ public class ModelAttrOfHouseOwnerService {
             System.out.println("sleep time geliyor mu?");
             System.out.println(sleepTime+"\n");
 
+            ///////*********************
+            ///////*********************
+            ///////*********************
+
             String smooking="";
             if(modelAttrOfHouseOwnerDto.getSmooking()==true)  smooking="yes";
             else smooking="no";
@@ -93,6 +97,8 @@ public class ModelAttrOfHouseOwnerService {
 
             //age yerine şimdilik 0 veriyorum çünkü age bizim db de yok
             String age="0";
+
+
 
             String rentingDuration=Integer.toString(modelAttrOfHouseOwnerDto.getRentingDuration());
 
@@ -120,6 +126,7 @@ public class ModelAttrOfHouseOwnerService {
 
 
     //updateOnePollOfHouseOwner
+    //ITS OKAY HERE
 
 
 }
