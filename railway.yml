@@ -1,5 +1,0 @@
-version: 1
-frontend:
-  commands:
-    - ./mvnw clean install
-    - ./mvnw spring-boot:run
