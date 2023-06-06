@@ -1,6 +1,7 @@
 package com.example.newProject.api.controllers;
 
 import com.example.newProject.DTOs.BasicDtos.HouseSaveDto;
+import com.example.newProject.DTOs.BasicDtos.HouseUpdateDto;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Services.BasicServices.CustomerService;
 import com.example.newProject.Services.BasicServices.HouseService;
@@ -64,6 +65,11 @@ public class HouseController {
     @GetMapping("/getHousesByClass/{classOfHouse}")
     public List<House> getHousesByClass(@PathVariable String classOfHouse){
         return houseService.getHousesByClass(classOfHouse);
+    }
+
+    @PutMapping("/updateOneHouseByHouseId/{houseId}")
+    public House updateOneHouseByHouseId(@PathVariable Long houseId,@RequestBody HouseUpdateDto houseResponse){
+        return houseService.updateOneHouseByHouseId(houseId,houseResponse);
     }
 
 

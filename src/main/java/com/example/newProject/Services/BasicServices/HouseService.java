@@ -2,6 +2,7 @@ package com.example.newProject.Services.BasicServices;
 
 
 import com.example.newProject.DTOs.BasicDtos.HouseSaveDto;
+import com.example.newProject.DTOs.BasicDtos.HouseUpdateDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
@@ -119,16 +120,17 @@ public class HouseService {
     }
 
 
+    public House updateOneHouseByHouseId(Long houseId, HouseUpdateDto houseResponse) {
+        House houseToUpdate = houseRepository.findById(houseId).orElse(null);
+        houseToUpdate.setFloor(houseResponse.getFloor());
+        houseToUpdate.setFurnished(houseResponse.getFurnished());
+        houseToUpdate.setHeatResource(houseResponse.getHeatResource());
+        houseToUpdate.setHouseAddress(houseResponse.getHouseAddress());
+        houseToUpdate.setHouseType(houseResponse.getHouseType());
+        houseToUpdate.setInternetPaved(houseResponse.getInternetPaved());
+        houseToUpdate.setRent(houseResponse.getRent());
+        houseRepository.save(houseToUpdate);
+        return houseToUpdate;
 
-
-
-
-
-
-
-
-
-
-
-
+    }
 }
