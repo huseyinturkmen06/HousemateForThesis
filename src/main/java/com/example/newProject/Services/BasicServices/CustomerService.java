@@ -10,6 +10,7 @@ import com.example.newProject.Entities.BasicEntities.HouseCustomer;
 import com.example.newProject.Repositories.BasicRepos.CustomerRepository;
 import com.example.newProject.Repositories.BasicRepos.HavingRelationRepository;
 import com.example.newProject.Repositories.BasicRepos.HouseRepository;
+import com.example.newProject.Services.password.PasswordLoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +24,15 @@ public class CustomerService {
     HavingRelationRepository havingRelationRepository;
     CustomerRepository customerRepository;
 
+    PasswordLoginUtil passwordLoginUtil;
+
     @Autowired
-    public CustomerService(HouseRepository houseRepository,HavingRelationRepository havingRelationRepository,CustomerRepository customerRepository) {
+    public CustomerService(HouseRepository houseRepository,HavingRelationRepository havingRelationRepository,
+                           CustomerRepository customerRepository,PasswordLoginUtil passwordLoginUtil) {
         this.houseRepository = houseRepository;
         this.havingRelationRepository = havingRelationRepository;
         this.customerRepository = customerRepository;
+        this.passwordLoginUtil= passwordLoginUtil;
     }
 
 
@@ -55,13 +60,18 @@ public class CustomerService {
     //save one customer
     //bu customer daha önce var mı diye kontrol edilecek
 
+
+    //encode password and save
     public Customer saveOneCustomer(CustomerRegisterDto customerRegisterDto){
         Customer customerToSave = new Customer();
         customerToSave.setCustomerName(customerRegisterDto.getCustomerName());
         customerToSave.setCustomerSurname(customerRegisterDto.getCustomerSurname());
         customerToSave.setCustomerUsername(customerRegisterDto.getCustomerUsername());
         customerToSave.setCustomerEmail(customerRegisterDto.getCustomerEmail());
-        customerToSave.setCustomerPassword(customerRegisterDto.getCustomerPassword());
+        //save and encode password
+        customerToSave.setCustomerPassword(
+                passwordLoginUtil.encodePassword(customerRegisterDto.getCustomerPassword())
+                );
         customerToSave.setCustomerAge(0);
         customerToSave.setCustomerHometown("");
         customerToSave.setCustomerDepartment("");
