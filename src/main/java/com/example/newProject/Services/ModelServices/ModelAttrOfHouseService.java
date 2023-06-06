@@ -196,7 +196,30 @@ public class ModelAttrOfHouseService {
         System.out.println("Evin class ı ::   "+classOfHouse);
 
 
+
+        //make all lists empty after all cycle!!!
+        sleepTimes.clear();
+        smookings.clear();
+        havingPets.clear();
+        luxuries.clear();
+        gpas.clear();
+        rentingDurations.clear();
+        prices.clear();
+        ///////////////////
+
+
         return modelAttrOfHouseRepo.save(modelAttributesOfHouse);
+
+
+
+
+
+
+
+
+
+
+
 
         //sonuç olarak bir ev id si verdiğimizde
         //houseOwners dan bu evlerin tüm ownerları bulunur
