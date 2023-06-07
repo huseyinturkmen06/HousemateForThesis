@@ -4,6 +4,7 @@ package com.example.newProject.Services.BasicServices;
 
 import com.example.newProject.DTOs.BasicDtos.CustomerRegisterDto;
 import com.example.newProject.DTOs.BasicDtos.CustomerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.LoginControlDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseCustomer;
@@ -118,6 +119,9 @@ public class CustomerService {
 
 
 
-
-
+    //login control
+    public Boolean customerLoginControl(LoginControlDto loginInfos) {
+        System.out.println(loginInfos.getUsername()+loginInfos.getPassword());
+        return passwordLoginUtil.customerLoginControl(loginInfos.getUsername(),loginInfos.getPassword());
+    }
 }

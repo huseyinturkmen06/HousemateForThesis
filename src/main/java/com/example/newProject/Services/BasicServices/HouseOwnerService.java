@@ -2,10 +2,12 @@ package com.example.newProject.Services.BasicServices;
 
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerRegisterDto;
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.LoginControlDto;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Repositories.BasicRepos.HouseOwnerRepository;
 import com.example.newProject.Repositories.BasicRepos.HouseRepository;
+import com.example.newProject.Services.password.PasswordLoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +18,14 @@ public class HouseOwnerService {
 
     HouseOwnerRepository houseOwnerRepository;
     HouseRepository houseRepository;
+
+    PasswordLoginUtil passwordLoginUtil;
     @Autowired
     public HouseOwnerService(HouseOwnerRepository houseOwnerRepository,
-                             HouseRepository houseRepository) {
+                             HouseRepository houseRepository,PasswordLoginUtil passwordLoginUtil) {
         this.houseOwnerRepository = houseOwnerRepository;
         this.houseRepository=houseRepository;
+        this.passwordLoginUtil=passwordLoginUtil;
     }
 
     //house owner ın evi var, evin de customer ları var
@@ -60,7 +65,10 @@ public class HouseOwnerService {
         houseOwnerToSave.setOwnerSurname(houseOwnerRegisterDto.getHouseOwnerSurname());
         houseOwnerToSave.setOwnerUsername(houseOwnerRegisterDto.getHouseOwnerUsername());
         houseOwnerToSave.setOwnerMail(houseOwnerRegisterDto.getHouseOwnerEmail());
-        houseOwnerToSave.setOwnerPassword(houseOwnerRegisterDto.getHouseOwnerPassword());
+        //encode and save pasword
+        houseOwnerToSave.setOwnerPassword(
+                passwordLoginUtil.encodePassword(  houseOwnerRegisterDto.getHouseOwnerPassword()  )
+                );
         houseOwnerToSave.setOwnerAge(0);
         houseOwnerToSave.setOwnerHometown("");
         houseOwnerToSave.setOwnerDepartment("");
@@ -134,6 +142,11 @@ public class HouseOwnerService {
 
     public House getHouseOfHouseOwner(Long houseOwnerId) {
         return houseOwnerRepository.findHouseOwnerByOwnerId(houseOwnerId).getHouse();
+    }
+
+    public Boolean houseOwnerLoginControl(LoginControlDto loginInfos) {
+        System.out.println(loginInfos.getUsername()+loginInfos.getPassword());
+        return passwordLoginUtil.houseOwnerLoginControl(loginInfos.getUsername(),loginInfos.getPassword());
     }
 
     //updatePasswordOfOneOwner

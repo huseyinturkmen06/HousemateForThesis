@@ -3,6 +3,7 @@ package com.example.newProject.api.controllers;
 
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerRegisterDto;
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.LoginControlDto;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Services.BasicServices.HouseOwnerService;
@@ -90,7 +91,10 @@ public class HouseOwnerController {
     //ve houseOwner ın HouseId si de yeni kaydolan evin id değeri olsun
 
 
-
+    @GetMapping("/houseOwnerLogin")
+    public Boolean houseOwnerLoginControl(@RequestBody LoginControlDto loginInfos){
+        return houseOwnerService.houseOwnerLoginControl(loginInfos);
+    }
 
 
 

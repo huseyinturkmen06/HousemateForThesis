@@ -2,6 +2,7 @@ package com.example.newProject.api.controllers;
 
 import com.example.newProject.DTOs.BasicDtos.CustomerRegisterDto;
 import com.example.newProject.DTOs.BasicDtos.CustomerUpdateDto;
+import com.example.newProject.DTOs.BasicDtos.LoginControlDto;
 import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Services.BasicServices.CustomerService;
 import com.example.newProject.Services.BasicServices.HouseService;
@@ -25,9 +26,6 @@ public class CustomerController {
         this.houseService = houseService;
         this.customerService=customerService;
     }
-
-
-
 
 
     @GetMapping("/getAllCustomers")
@@ -68,6 +66,10 @@ public class CustomerController {
     //kullanıcı bir evi beğenince birden fazla beğenirse tabloda fazladan kayıt oluşuyor
 
 
+    @GetMapping("/customerLogin")
+    public Boolean customerLoginControl(@RequestBody LoginControlDto loginInfos){
+        return customerService.customerLoginControl(loginInfos);
+    }
 
 
 
