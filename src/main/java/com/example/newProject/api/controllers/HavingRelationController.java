@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/relations")
+@CrossOrigin
 public class HavingRelationController {
 
     private HouseService houseService;

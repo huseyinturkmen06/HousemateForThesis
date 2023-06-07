@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/houseOwners")
+@CrossOrigin
 public class HouseOwnerController {
 
     private HouseOwnerService houseOwnerService;

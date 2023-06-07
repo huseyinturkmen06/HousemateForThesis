@@ -19,6 +19,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/models")
+@CrossOrigin
 public class ModelAttributesController {
 
     private ModelAttrOfCustomerService modelAttrOfCustomerService;
