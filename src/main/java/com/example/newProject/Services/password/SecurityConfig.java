@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    //to avoid from unouthorized error
+    //to avoid from unauthorized error
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
