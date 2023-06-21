@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -123,5 +124,17 @@ public class CustomerService {
     public Customer customerLoginControl(LoginControlDto loginInfos) {
         System.out.println(loginInfos.getUsername()+loginInfos.getPassword());
         return passwordLoginUtil.customerLoginControl(loginInfos.getUsername(),loginInfos.getPassword());
+    }
+
+
+    public Customer updateCustomerPasswordByUsername(LoginControlDto loginControlDto) {
+        Customer customer = customerRepository.findCustomerByCustomerUsername(loginControlDto.getUsername());
+        customer.setCustomerPassword(   passwordLoginUtil.encodePassword(  loginControlDto.getPassword() )     );
+        customerRepository.save(customer);
+        return customer;
+
+
+
+
     }
 }

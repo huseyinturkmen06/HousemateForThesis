@@ -3,6 +3,7 @@ package com.example.newProject.Services.BasicServices;
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerRegisterDto;
 import com.example.newProject.DTOs.BasicDtos.HouseOwnerUpdateDto;
 import com.example.newProject.DTOs.BasicDtos.LoginControlDto;
+import com.example.newProject.Entities.BasicEntities.Customer;
 import com.example.newProject.Entities.BasicEntities.House;
 import com.example.newProject.Entities.BasicEntities.HouseOwner;
 import com.example.newProject.Repositories.BasicRepos.HouseOwnerRepository;
@@ -147,6 +148,13 @@ public class HouseOwnerService {
     public HouseOwner houseOwnerLoginControl(LoginControlDto loginInfos) {
         System.out.println(loginInfos.getUsername()+loginInfos.getPassword());
         return passwordLoginUtil.houseOwnerLoginControl(loginInfos.getUsername(),loginInfos.getPassword());
+    }
+
+    public HouseOwner updateHouseOwnerPasswordByUsername(LoginControlDto loginControlDto) {
+        HouseOwner houseOwner = houseOwnerRepository.findHouseOwnerByOwnerUsername(loginControlDto.getUsername());
+        houseOwner.setOwnerPassword(  passwordLoginUtil.encodePassword(  loginControlDto.getPassword() )  );
+        houseOwnerRepository.save(houseOwner);
+        return houseOwner;
     }
 
     //updatePasswordOfOneOwner
