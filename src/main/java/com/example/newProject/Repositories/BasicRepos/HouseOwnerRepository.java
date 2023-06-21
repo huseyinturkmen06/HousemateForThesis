@@ -13,4 +13,6 @@ public interface HouseOwnerRepository extends JpaRepository<HouseOwner,Long> {
 
     HouseOwner findHouseOwnerByOwnerId(Long houseOwnerId);
 
+    HouseOwner findHouseOwnerByOwnerMail(String mail);
+
 }

@@ -106,6 +106,12 @@ public class HouseOwnerController {
     }
 
 
+    @GetMapping("/getOneHouseOwnerByMail/{mail}")
+    public HouseOwner getOneHouseOwnerByMail(@PathVariable String mail){
+        return houseOwnerService.getOneHouseOwnerByMail(mail);
+    }
+
+
 
 
 }

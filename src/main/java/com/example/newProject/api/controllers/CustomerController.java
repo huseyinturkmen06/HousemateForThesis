@@ -77,6 +77,11 @@ public class CustomerController {
         return customerService.updateCustomerPasswordByUsername(loginControlDto);
     }
 
+    @GetMapping("/getOneCustomerByMail/{mail}")
+    public Customer getOneCustomerByMail(@PathVariable String mail){
+        return customerService.getOneCustomerByMail(mail);
+    }
+
 
 
 

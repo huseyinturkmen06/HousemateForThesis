@@ -137,4 +137,9 @@ public class CustomerService {
 
 
     }
+
+    public Customer getOneCustomerByMail(String mail) {
+        Customer customer = customerRepository.findCustomerByCustomerEmail(mail);
+        return customer;
+    }
 }

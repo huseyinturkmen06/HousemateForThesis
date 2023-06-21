@@ -157,6 +157,12 @@ public class HouseOwnerService {
         return houseOwner;
     }
 
+    public HouseOwner getOneHouseOwnerByMail(String mail) {
+        HouseOwner houseOwner = houseOwnerRepository.findHouseOwnerByOwnerMail(mail);
+        return houseOwner;
+
+    }
+
     //updatePasswordOfOneOwner
 
 
