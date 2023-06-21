@@ -144,7 +144,7 @@ public class HouseOwnerService {
         return houseOwnerRepository.findHouseOwnerByOwnerId(houseOwnerId).getHouse();
     }
 
-    public Boolean houseOwnerLoginControl(LoginControlDto loginInfos) {
+    public HouseOwner houseOwnerLoginControl(LoginControlDto loginInfos) {
         System.out.println(loginInfos.getUsername()+loginInfos.getPassword());
         return passwordLoginUtil.houseOwnerLoginControl(loginInfos.getUsername(),loginInfos.getPassword());
     }

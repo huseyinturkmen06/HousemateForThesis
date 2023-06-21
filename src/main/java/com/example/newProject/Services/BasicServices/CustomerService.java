@@ -120,7 +120,7 @@ public class CustomerService {
 
 
     //login control
-    public Boolean customerLoginControl(LoginControlDto loginInfos) {
+    public Customer customerLoginControl(LoginControlDto loginInfos) {
         System.out.println(loginInfos.getUsername()+loginInfos.getPassword());
         return passwordLoginUtil.customerLoginControl(loginInfos.getUsername(),loginInfos.getPassword());
     }

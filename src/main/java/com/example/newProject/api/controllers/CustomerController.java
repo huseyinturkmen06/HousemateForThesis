@@ -67,7 +67,7 @@ public class CustomerController {
 
 
     @GetMapping("/customerLogin")
-    public Boolean customerLoginControl(@RequestBody LoginControlDto loginInfos){
+    public Customer customerLoginControl(@RequestBody LoginControlDto loginInfos){
         return customerService.customerLoginControl(loginInfos);
     }
 

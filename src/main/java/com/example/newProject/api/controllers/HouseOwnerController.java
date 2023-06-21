@@ -92,7 +92,7 @@ public class HouseOwnerController {
 
 
     @GetMapping("/houseOwnerLogin")
-    public Boolean houseOwnerLoginControl(@RequestBody LoginControlDto loginInfos){
+    public HouseOwner houseOwnerLoginControl(@RequestBody LoginControlDto loginInfos){
         return houseOwnerService.houseOwnerLoginControl(loginInfos);
     }
 

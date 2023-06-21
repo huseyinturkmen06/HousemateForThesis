@@ -43,7 +43,7 @@ public class PasswordLoginUtil {
 
 
     //find customer by username and compare two passwords from db and frontend
-    public Boolean customerLoginControl(String customerUsername,String rawPassword) {
+    public Customer customerLoginControl(String customerUsername,String rawPassword) {
         //we are using new instead of dependency injection here,
         //because matches function doesn't work properly the other way
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -54,21 +54,21 @@ public class PasswordLoginUtil {
         boolean matches = passwordEncoder.matches(rawPassword, hashedPassword);
         if (  !  customerRepository.existsById(customer.getCustomerId()) ){
             System.out.println("No such a user!");
-            return false;
+            return null;
         } else if (customerRepository.existsById(customer.getCustomerId()) && matches==false) {
             System.out.println("User founded, but false password");
-            return false;
+            return null;
         }
         else {
             System.out.println("Welcome!");
-            return true;
+            return customer;
         }
     }
 
 
 
     //find houseOwner by username and compare two passwords from db and frontend
-    public Boolean houseOwnerLoginControl(String houseOwnerUserName,String rawPassword) {
+    public HouseOwner houseOwnerLoginControl(String houseOwnerUserName,String rawPassword) {
         //we are using new instead of dependency injection here,
         //because matches function doesn't work properly the other way
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -79,14 +79,14 @@ public class PasswordLoginUtil {
         boolean matches = passwordEncoder.matches(rawPassword, hashedPassword);
         if (  !  houseOwnerRepository.existsById(houseOwner.getOwnerId()) ){
             System.out.println("No such a user!");
-            return false;
+            return null;
         } else if (houseOwnerRepository.existsById(houseOwner.getOwnerId()) && matches==false) {
             System.out.println("User founded, but false password");
-            return false;
+            return null;
         }
         else {
             System.out.println("Welcome!");
-            return true;
+            return houseOwner;
         }
     }
 
