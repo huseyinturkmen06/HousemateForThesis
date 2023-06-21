@@ -1,5 +1,10 @@
 package com.example.newProject.Model_Integration;
 
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
@@ -61,31 +66,35 @@ public class PredictionHandler {
 //    }
 
 
+    private static final OkHttpClient client = new OkHttpClient();
 
-    private static String sendGET(String sleep_time,String smoking,String having_a_pet,String luxury_care,String GPA,String age,String renting_duration,String price) throws IOException {
-        String value = "";
-        String GET_URL = "housemate-flask.up.railway.app/predictSVCGet?Sleep="+sleep_time+"&Smoking="+smoking+"&PET="+having_a_pet+"&Luxury="+luxury_care+"&GPA="+GPA+"&Renting="+renting_duration+"&Price="+price;
-        URL obj = new URL(GET_URL);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        int responseCode = con.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+    private static String sendGET(String sleep_time, String smoking, String having_a_pet, String luxury_care,
+                                  String GPA, String age, String renting_duration, String price) throws IOException {
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host("housemate-flask.up.railway.app")
+                .addPathSegment("predictSVCGet")
+                .addQueryParameter("Sleep", sleep_time)
+                .addQueryParameter("Smoking", smoking)
+                .addQueryParameter("PET", having_a_pet)
+                .addQueryParameter("Luxury", luxury_care)
+                .addQueryParameter("GPA", GPA)
+                .addQueryParameter("Renting", renting_duration)
+                .addQueryParameter("Price", price)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                System.out.println("GET request did not work.");
+                return "";
             }
-            value = response.toString();
-            in.close();
-
-            // print result
-            //System.out.println(response.toString()); aç sonra
-        } else {
-            System.out.println("GET request did not work.");
+            return response.body().string();
         }
-        return value;
     }
 
 
